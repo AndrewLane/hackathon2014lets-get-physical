@@ -1,8 +1,23 @@
-angular.module( 'hackathon').controller( 'GetFriends', function ( $scope, $http, $stateParams )
+angular.module( 'hackathon').controller( 'GetInfoCards', function ( $scope, $http, $stateParams )
 {
-	$http.get( '/api/friends/' + $stateParams.index || "" ).success( function ( data )
+	var fInd = $stateParams.index || '';
+	
+	if ((fInd == '') || (fInd == '0'))
 	{
-		$scope.friendInfoCards = data;
-	} );
+		// get all
+		$http.get( '/api/friends/' ).success( function ( data )
+		{
+			$scope.friendInfoCards = data;
+		} );
+	}
+	else
+	{
+		// get specific
+		$http.get( '/api/friends/' + fInd ).success( function ( data )
+		{
+			$scope.friendInfoCards = data;
+		} );
+	
+	}
 });
 
