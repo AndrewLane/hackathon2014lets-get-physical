@@ -1,38 +1,66 @@
-﻿using System;
+﻿using Hackathon.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using Hackathon.Models;
 
 namespace Hackathon.Controllers
 {
     public class FriendsController : ApiController
     {
-
-        private FriendInfoCard MockFriend()
-        {
-            var x = new FriendInfoCard();
-            x.FullName = "Dan Kang";
-            x.FriendId = "dankang";
-            x.LastSocialUpdateMetadata = "Hackathon friend";
-            x.PhysicalInteractionScore = 10;
-            x.VirtualInteractionScore = 5;
-            return x;
-        }
         // GET api/friends
         public IEnumerable<FriendInfoCard> Get()
         {
-            return new List<FriendInfoCard>() {
-                MockFriend(), MockFriend(), MockFriend(), MockFriend(), MockFriend()
+            return GetAllDummyCards();
+        }
+
+        FriendInfoCard GetDummyCard(int index)
+        {
+            var physicalScore = 10 - index;
+            if (physicalScore < 0) physicalScore = 0;
+
+            var virtualScore = index;
+            if (virtualScore > 10) virtualScore = 10;
+
+            return new FriendInfoCard
+            {
+                FriendId = String.Format("friendwithindex{0}", index),
+                FullName = String.Format("Friend #{0}", index),
+                LastSocialUpdateMetadata = "Status update from this person",
+                PhysicalInteractionScore = physicalScore,
+                VirtualInteractionScore = virtualScore,
+                ProfilePictureImagePath = "https://pbs.twimg.com/profile_images/2619899212/2zch7tkkmu327fkdaobt.jpeg"
+            };
+        }
+
+        IEnumerable<FriendInfoCard> GetAllDummyCards()
+        {
+            return new List<FriendInfoCard>
+            {
+                new FriendInfoCard
+                {
+                    FriendId = "olivianewtonjohn",
+                    FullName = "Olivia Newton-John",
+                    LastSocialUpdateMetadata = "Check out my new video: http://www.youtube.com/watch?v=vWz9VN40nCA",
+                    PhysicalInteractionScore = 6,
+                    VirtualInteractionScore = 5,
+                    ProfilePictureImagePath = "http://i.ytimg.com/vi/vWz9VN40nCA/0.jpg"
+                },
+                new FriendInfoCard
+                {
+                    FriendId = "helloworld",
+                    FullName = "Hello World",
+                    LastSocialUpdateMetadata = "Hackathon 2014",
+                    PhysicalInteractionScore = 2,
+                    VirtualInteractionScore = 8,
+                    ProfilePictureImagePath = "https://pbs.twimg.com/profile_images/2619899212/2zch7tkkmu327fkdaobt.jpeg"
+                }
             };
         }
 
         // GET api/friends/5
         public FriendInfoCard Get(int id)
         {
-            return MockFriend();
+            return GetDummyCard(id);
         }
 
         // POST api/friends
