@@ -133,6 +133,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\FaceBookHelper.cs" />
     <Compile Include="Controllers\FriendsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -146,13 +147,14 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Client\init\app.js" />
     <Content Include="Client\init\fb.js" />
+    <Content Include="Client\js\friendsctrl.js" />
     <Content Include="Client\js\leaderboard.js" />
     <Content Include="Client\js\test.js" />
+    <Content Include="Client\partials\friend.html" />
     <Content Include="Client\partials\home.html" />
     <Content Include="Client\partials\leaderboard.html" />
     <Content Include="Client\partials\test.html" />
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

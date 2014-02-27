@@ -287,6 +287,7 @@ table {
   }
   .label {
     border: 1px solid #000;
+    font-size:20px;
   }
   .table {
     border-collapse: collapse !important;
