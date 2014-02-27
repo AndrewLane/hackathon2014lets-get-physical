@@ -39,8 +39,7 @@ function testAPI() {
 
         var uid = response.authResponse.userID;
         var accessToken = response.authResponse.accessToken;
-        globalUID = uid;
-        globalAuthToken = accessToken;
+        FacebookLogin().SetAuth(uid, accessToken);
         console.log('uid: ' + uid);
         console.log('accessToken: ' + accessToken);
         } else if (response.status === 'not_authorized') {
@@ -51,6 +50,3 @@ function testAPI() {
         }
     });
 }
-
-var globalUID = '';
-var globalAuthToken = '';
