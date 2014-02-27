@@ -1,4 +1,3 @@
-
-**Let's Get Physcal!**
+**Let's Get Physical!**
 
 More information to come...
