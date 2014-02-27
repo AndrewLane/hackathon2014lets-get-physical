@@ -13,6 +13,7 @@ namespace Hackathon
     {
         protected void Application_Start()
         {
+            System.Web.Optimization.BundleTable.EnableOptimizations = false;
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
