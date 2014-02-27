@@ -7,7 +7,7 @@ using System.Text;
 using System.Net;
 
 
-namespace MvcApplication1.Controllers
+namespace Hackathon.Controllers
 {
     public class FaceBookHelper
     {
