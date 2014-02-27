@@ -9,6 +9,9 @@
         console.log(authToken);
         $http.defaults.headers.common['FacebookUserId'] = userId;
         $http.defaults.headers.common['FacebookAuthToken'] = authToken;
+      },
+      IsUserLoggedIn: function () {
+        return false;
       }
     };
   }

@@ -19,7 +19,7 @@
     });
 
     $stateProvider.state('leaderboard', {
-      url: '/leaderboard',
+      url: '/leaderboard/:index',
       templateUrl: '/Client/partials/leaderboard.html',
       controller: 'GetInfoCards'
     });
