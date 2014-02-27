@@ -145,6 +145,7 @@
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Client\init\app.js" />
+    <Content Include="Client\init\fb.js" />
     <Content Include="Client\js\leaderboard.js" />
     <Content Include="Client\js\test.js" />
     <Content Include="Client\partials\home.html" />
