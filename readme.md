@@ -1,3 +1,0 @@
-**Let's Get Physical!**
-
-More information to come...
