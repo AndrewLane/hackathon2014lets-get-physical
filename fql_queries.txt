@@ -1,0 +1,5 @@
+--photos of my friends that i am tagged in since 1 year ago
+SELECT object_id, caption, owner
+          FROM photo 
+          WHERE owner in (select uid2 from friend where uid1 = me())  AND 
+                object_id IN (SELECT object_id FROM photo_tag WHERE subject=me() AND created > 1361941200 ) 
