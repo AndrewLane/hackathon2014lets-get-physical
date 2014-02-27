@@ -42,6 +42,10 @@ input[type="checkbox"].input-validation-error {
 }
 
 .center { 
-margin-left:auto;
-margin-right:auto;
+text-align:center;
+}
+
+.muted {
+    color:#bbb;
+    font-size:11px;
 }
