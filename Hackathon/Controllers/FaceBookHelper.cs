@@ -61,7 +61,7 @@ namespace Hackathon.Controllers
             var webClient = new WebClient();
 
             
-            var response = webClient.DownloadData(string.Format("https://graph.facebook.com/1207352884/friends?access_token={0}", _authToken));
+            var response = webClient.DownloadData(string.Format("https://graph.facebook.com/{0}/friends?access_token={1}", _id, _authToken));
 
             var anonymousTypeToReturn = new { data = new List<Friend>() };
 
