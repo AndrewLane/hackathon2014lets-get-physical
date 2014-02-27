@@ -21,3 +21,16 @@ angular.module( 'hackathon').controller( 'GetInfoCards', function ( $scope, $htt
 	}
 });
 
+angular.module('hackathon').controller('NotifyFriend', function ($scope, $http, $stateParams) 
+{
+	var toAdd = $stateParams.toAdd || '';
+	var msg = $stateParams.toMsg || 'Hello there';
+	
+	$scope.notifyFriendSuccess = false;
+	
+	$http.get( '/api/notifyfriend/' + toAdd + '/' + msg ).success( function ( data )
+	{
+		$scope.notifyFriendSuccess = true;
+	} );
+});
+
