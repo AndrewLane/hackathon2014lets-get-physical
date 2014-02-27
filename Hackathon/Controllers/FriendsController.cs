@@ -2,10 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using Hackathon.Common;
 
 namespace Hackathon.Controllers
 {
-    public class FriendsController : ApiController
+    public class FriendsController : AuthController
     {
         // GET api/friends
         public IEnumerable<FriendInfoCard> Get()

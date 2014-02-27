@@ -133,8 +133,11 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Common\AuthController.cs" />
+    <Compile Include="Common\AuthToken.cs" />
     <Compile Include="Controllers\FriendsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginTestController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -148,10 +151,13 @@
     <Content Include="Client\init\fb.js" />
     <Content Include="Client\js\friendsctrl.js" />
     <Content Include="Client\js\leaderboard.js" />
+    <Content Include="Client\js\login.js" />
+    <Content Include="Client\js\logintest.js" />
     <Content Include="Client\js\test.js" />
     <Content Include="Client\partials\friend.html" />
     <Content Include="Client\partials\home.html" />
     <Content Include="Client\partials\leaderboard.html" />
+    <Content Include="Client\partials\logintest.html" />
     <Content Include="Client\partials\test.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="favicon.ico" />

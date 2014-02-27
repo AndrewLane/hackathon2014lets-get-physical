@@ -29,5 +29,12 @@
       templateUrl: '/Client/partials/friend.html',
       controller: 'GetInfoCards'
     });
+
+    $stateProvider.state('logintest', {
+      url: '/logintest',
+      templateUrl: '/Client/partials/logintest.html',
+      controller: 'LoginTest'
+    });
   }
 }());
+
