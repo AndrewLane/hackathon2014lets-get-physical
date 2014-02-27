@@ -25,16 +25,15 @@
       </div>
     </div>
     <div class="container">
-      <span class="label label-primary">#1</span>
+      <span class="label label-primary">{{friendInfoCards.PhysicalInteractionScore}}</span>
       <h3 style="display:inline-flex;">
         {{friendInfoCards.FullName}}
       </h3>
       <div>
-        This is where the user's status update would display. Bob himself was
-        a man of few words, so not much else to say here.&nbsp;
+        {{friendInfoCards.LastSocialUpdateMetadata}}
       </div>
       <div class="center">
-      <img src="http://drugabuse.com/wp-content/uploads/Bob-Marley-160x135.jpg" style="padding-bottom:10px;">
+      <img src= "{{friendInfoCards.ProfilePictureImagePath}}" style="padding-bottom:10px;">
     <a href="#" class="btn btn-success">Send Message</a> <br>
     <span class="muted">You were last in touch with Bob 3 days ago</span>
     </div>
