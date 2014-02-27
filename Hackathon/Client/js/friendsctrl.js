@@ -2,7 +2,7 @@ angular.module( 'hackathon').controller( 'GetInfoCards', function ( $scope, $htt
 {
 	var fInd = $stateParams.index || '';
 	
-	if ((fInd == '') || (fInd == '0'))
+	if ((fInd === '') || (fInd === 0))
 	{
 		// get all
 		$http.get( '/api/friends/' ).success( function ( data )
