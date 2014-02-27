@@ -17,5 +17,14 @@
       templateUrl: '/Client/partials/test.html',
       controller: 'Test'
     });
+
+    $stateProvider.state('leaderboard', {
+      url: '/leaderboard',
+      templateUrl: '/Client/partials/leaderboard.html',
+      controller: 'Leaderboard'
+    });
+
+
+
   }
 }());
