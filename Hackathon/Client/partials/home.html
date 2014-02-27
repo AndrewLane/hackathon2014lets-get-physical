@@ -26,9 +26,11 @@
 
 
 <h1>Let's Get Physical</h1>
-<a ui-sref="test">Test</a>
-<a ui-sref="login">Social Login</a>
-<a ui-sref="leaderboard">Leaderboard</a>
-
+      <ul>
+          <li><a ui-sref="test">Test</a></li>
+          <li><a ui-sref="login">Social Login</a></li>
+          <li><a ui-sref="leaderboard">Leaderboard</a></li>
+          <li ng-repeat="i in [1, 2, 3, 4, 5]"><a ui-sref="friend({ index: {{i}} })">Friend #{{i}}</a></li>
+      </ul>
 </body>
 </html>

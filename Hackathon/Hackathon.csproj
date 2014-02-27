@@ -146,8 +146,10 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Client\init\app.js" />
     <Content Include="Client\init\fb.js" />
+    <Content Include="Client\js\friendsctrl.js" />
     <Content Include="Client\js\leaderboard.js" />
     <Content Include="Client\js\test.js" />
+    <Content Include="Client\partials\friend.html" />
     <Content Include="Client\partials\home.html" />
     <Content Include="Client\partials\leaderboard.html" />
     <Content Include="Client\partials\test.html" />

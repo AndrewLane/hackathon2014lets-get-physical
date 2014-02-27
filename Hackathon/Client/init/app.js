@@ -24,7 +24,10 @@
       controller: 'Leaderboard'
     });
 
-
-
+    $stateProvider.state('friend', {
+      url: '/friend/:index',
+      templateUrl: '/Client/partials/friend.html',
+      controller: 'GetInfoCards'
+    });
   }
 }());
