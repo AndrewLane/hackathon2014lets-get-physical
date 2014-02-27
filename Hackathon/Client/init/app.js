@@ -21,7 +21,7 @@
     $stateProvider.state('leaderboard', {
       url: '/leaderboard',
       templateUrl: '/Client/partials/leaderboard.html',
-      controller: 'friendInfoCard'
+      controller: 'GetInfoCards'
     });
 
     $stateProvider.state('friend', {
