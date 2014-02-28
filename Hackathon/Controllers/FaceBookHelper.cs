@@ -18,7 +18,7 @@ namespace Hackathon.Controllers
         {
             public string uid;
             public string name;
-            public string pic_small;
+            public string pic_big;
         }
 
         public class FriendExtendedInfo
