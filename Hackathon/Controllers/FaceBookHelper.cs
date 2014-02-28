@@ -221,10 +221,11 @@ namespace Hackathon.Controllers
             if(lc != null && lc.data != null)
             {
                 friendInfo.birthday = lc.data[0].birthday;
-                friendInfo.location = new Location();
+                
 
                 if(lc.data[0].current_location != null)
                 {
+                    friendInfo.location = new Location();
                     friendInfo.location.city = lc.data[0].current_location.city == null ? null : lc.data[0].current_location.city.Value;
                     friendInfo.location.country = lc.data[0].current_location.country == null ? null : lc.data[0].current_location.country.Value;
                     friendInfo.location.latitude = lc.data[0].current_location.latitude == null ? 0 : (decimal)(lc.data[0].current_location.latitude.Value);
