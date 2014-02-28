@@ -16,7 +16,7 @@ namespace Hackathon.Controllers
             var fbHelper = new FaceBookHelper(AuthToken, UserId);
 
             return
-                fbHelper.GetFriends().Select(friend => new FriendInfoCard { FriendId = friend.id, FullName = friend.name });
+                fbHelper.GetFriends().Select(friend => new FriendInfoCard { FriendId = friend.uid, FullName = friend.name });
         }
 
         // GET api/friends/5
@@ -30,7 +30,7 @@ namespace Hackathon.Controllers
                         friend =>
                             new FriendInfoCard
                             {
-                                FriendId = friend.id,
+                                FriendId = friend.uid,
                                 FullName = friend.name,
                                 VirtualInteractionScore = friend.virtualRank,
                                 PhysicalInteractionScore = friend.physicalRank,
