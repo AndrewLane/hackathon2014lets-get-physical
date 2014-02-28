@@ -3,5 +3,6 @@
     public class FriendExtendedInfo
     {
         public string message;
+        public DateTime? message_datetime;
     }
 }
