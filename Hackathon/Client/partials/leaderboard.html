@@ -1,8 +1,8 @@
 ﻿<div ng-show="friendInfoCards" class="container">
-    <div ng-hide="friendInfoCards">
-        <i class="fa-spinner icon-animate"></i>
-    </div>
-    <span class="label label-primary">{{friendInfoCards.TotalInteractionScore}}</span>
+<div ng-hide="friendInfoCards">
+    <i class="fa-spinner icon-animate"></i>
+</div>
+<span class="label label-primary">{{friendInfoCards.TotalInteractionScore}}</span>
     <h5 style="display:inline-flex;">
         {{friendInfoCards.FullName}}
     </h5>
@@ -11,23 +11,25 @@
     </div>
     <div class="center">
         <img src="{{friendInfoCards.ProfilePictureImagePath}}" style="padding-bottom:10px;">
-        <table class="table">
-            <tbody>
-                <tr>
-                    <td>
-                        Physical
-                    </td>
-                    <td>
-                        Digital
-                    </td>
-                </tr>
-                <tr>
-                    <td><span class="label label-success">{{friendInfoCards.PhysicalInteractionScore}}</span></td>
-                    <td><span class="label label-danger">{{friendInfoCards.VirtualInteractionScore}}</span></td>
-                </tr>
-            </tbody>
-        </table>
-        <a href="#" class="btn btn-success">Send Message</a> <br>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>
+              Physical
+            </td>
+            <td>
+              Digital
+            </td>
+          </tr>
+          <tr>
+            <td><span class="label label-success">{{friendInfoCards.PhysicalInteractionScore}}</span></td>
+            <td><span class="label label-danger">{{friendInfoCards.VirtualInteractionScore}}</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+        <a class="btn btn-success" ng-click="sendMessage()">Send Message</a> <br>
+
         <span class="muted">You were last in touch with {{friendInfoCards.FullName}} 3 days ago</span>
     </div>
     <hr>
