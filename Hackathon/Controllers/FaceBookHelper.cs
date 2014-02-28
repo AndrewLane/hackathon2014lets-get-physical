@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Hackathon.CacheHelper;
-using Hackathon.Models;
 using Newtonsoft.Json;
+using System.Text;
 using System.Net;
+using Hackathon.Models;
+
 
 namespace Hackathon.Controllers
 {
@@ -24,7 +26,7 @@ namespace Hackathon.Controllers
             _tempRankData = new Dictionary<string, RunningTotals>();
         }
 
-        public List<T> ExecuteApiCall<T>(string url)
+        protected List<T> ExecuteApiCall<T>(string url)
         {
             var cacheKey = url;
             return HttpContext.Current.Cache.GetOrAdd(cacheKey, () =>
@@ -44,18 +46,20 @@ namespace Hackathon.Controllers
 
         }
 
-        public List<Friend> GetFriends()
+        protected List<Friend> GetFriends()
         {
-            return ExecuteFQL<Friend>("SELECT uid, name, pic_big FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) ");
+            var friends = ExecuteFQL<Friend>("SELECT uid, name, pic_big FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) ");
+
+
+            return friends;
         }
 
-
-        private List<Status> GetStatusList()
+        protected List<Status> GetStatusList()
         {
             return ExecuteApiCall<Status>(string.Format("https://graph.facebook.com/{0}/statuses?fields=id,likes&until=1384899552&access_token={1}", _id, _authToken));
         }
 
-        private List<T> ExecuteFQL<T>(string FQL)
+        protected List<T> ExecuteFQL<T>(string FQL)
         {
             string fql = System.Web.HttpUtility.UrlEncode(FQL);
 
@@ -80,22 +84,36 @@ namespace Hackathon.Controllers
             return ExecuteFQL<CommentResult>(fql);
         }
 
-        public FriendExtendedInfo GetFriendExtendedInfo(string uid)
+        private List<CheckIn> GetCheckins()
         {
-            var friendInfo = new FriendExtendedInfo();
+            var webClient = new WebClient();
 
-            LastMessage lm = ExecuteFQL<LastMessage>("SELECT uid, message FROM status WHERE uid = " + uid + " ORDER BY time DESC LIMIT 1").FirstOrDefault();
+            var friends = GetFriends();
 
-            if (lm != null)
-                friendInfo.message = lm.message;
+            var anonymousTypeToReturn = new { data = new List<CheckIn>() };
 
-            return friendInfo;
+            var totalCheckIns = new List<CheckIn>();
+
+            foreach (Friend friend in friends)
+            {
+                string url = string.Format("https://graph.facebook.com/{0}/checkins?since={1}&access_token={2}&fields=created_time,id,from,place", friend.uid, GetUnixTime(DateTime.Today.AddDays(c_BackNumberOfDays)).ToString(), _authToken);
+
+                var friendCheckIns = ExecuteApiCall<CheckIn>(url);
+
+                totalCheckIns.AddRange(friendCheckIns);
+
+            }
+
+            return totalCheckIns;
+
         }
-
+        
         private class FriendPhoto
         {
             public string owner;
         }
+
+        #region "Public Methods"
 
         public List<RankedFriend> GetRankedFriends()
         {
@@ -103,12 +121,11 @@ namespace Hackathon.Controllers
 
             foreach (var friend in friends)
             {
-                _tempRankData[friend.uid] = new RunningTotals
-                {
-                    totalPhysicalRank = 0,
-                    totalVirtualRank = 0,
-                    lastDateTime = 0
-                };
+                _tempRankData[friend.uid] = new RunningTotals();
+                _tempRankData[friend.uid].totalPhysicalRank = 0;
+                _tempRankData[friend.uid].totalVirtualRank = 0;
+                _tempRankData[friend.uid].lastDateTime = 0;
+
             }
 
             var photoFriends = GetFriendPhotosImTaggedIn();
@@ -121,6 +138,7 @@ namespace Hackathon.Controllers
                 }
             }
 
+
             var Statuses = GetStatusList();
             foreach (var stat in Statuses)
             {
@@ -132,6 +150,7 @@ namespace Hackathon.Controllers
                             _tempRankData[friendLike.id].totalVirtualRank  += 1;
                     }
                 }
+
             }
 
             var checkIns = GetFriendsWhoTaggedMeInCheckins();
@@ -141,6 +160,7 @@ namespace Hackathon.Controllers
                     _tempRankData[ci.author_uid].totalPhysicalRank  += 1;
 
             }
+
 
             var commenters = GetFriendsWhoHaveCommented();
             foreach(var commenter in commenters)
@@ -153,38 +173,33 @@ namespace Hackathon.Controllers
                 }
             }
 
-            var rankedFriends =
-                friends.ConvertAll(
-                    (x) =>
-                        new RankedFriend(x, _tempRankData[x.uid].totalVirtualRank,
-                            _tempRankData[x.uid].totalPhysicalRank,
-                            UnixTimeStampToDateTime(_tempRankData[x.uid].lastDateTime)));
+            var rankedFriends = friends.ConvertAll((x) => new RankedFriend(x, _tempRankData[x.uid].totalVirtualRank , _tempRankData[x.uid].totalPhysicalRank,  UnixTimeStampToDateTime(_tempRankData[x.uid].lastDateTime)));
+
             return rankedFriends;
         }
-
-
-        public List<CheckIn> GetCheckins()
+        
+        public FriendExtendedInfo GetFriendExtendedInfo(string uid)
         {
-            var friends = GetFriends();
+            var friendInfo = new FriendExtendedInfo();
 
-            var totalCheckIns = new List<CheckIn>();
+            LastMessage lm = ExecuteFQL<LastMessage>("SELECT uid, message, time FROM status WHERE uid = " + uid + " ORDER BY time DESC LIMIT 1").FirstOrDefault();
 
-            foreach (Friend friend in friends)
+            if (lm != null)
             {
-                string url = string.Format("https://graph.facebook.com/{0}/checkins?since={1}&access_token={2}&fields=created_time,id,from,place", friend.uid, GetUnixTime(DateTime.Today.AddDays(c_BackNumberOfDays)).ToString(), _authToken);
-
-                var friendCheckIns = ExecuteApiCall<CheckIn>(url);
-
-                totalCheckIns.AddRange(friendCheckIns);
+                friendInfo.message = lm.message;
+                friendInfo.message_datetime = UnixTimeStampToDateTime(lm.time);
             }
 
-            return totalCheckIns;
-
+            return friendInfo;
         }
+ 
+        #endregion
 
-        public static double GetUnixTime(DateTime dateTimeConvert)
+        #region "Utility Functions"
+
+        public static double GetUnixTime(DateTime DateTimeConvert)
         {
-            return (dateTimeConvert - new DateTime(1970, 1, 1).ToLocalTime()).TotalSeconds;
+            return (DateTimeConvert - new DateTime(1970, 1, 1).ToLocalTime()).TotalSeconds;
         }
 
         public static DateTime? UnixTimeStampToDateTime(double unixTimeStamp)
@@ -192,9 +207,11 @@ namespace Hackathon.Controllers
             if (unixTimeStamp == 0) return null;
 
             // Unix timestamp is seconds past epoch
-            DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
             dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
             return dtDateTime;
         }
+
+    #endregion
     }
 }
