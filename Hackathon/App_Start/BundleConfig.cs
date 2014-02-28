@@ -28,7 +28,9 @@ namespace Hackathon
                       "~/Scripts/angular.js",
                       "~/Scripts/angular-touch.js",
                       "~/Scripts/AngularUI/ui-router.js",
-                      "~/Scripts/ui-bootstrap-tpls-0.10.0.js"
+                      "~/Scripts/ui-bootstrap-tpls-0.10.0.js",
+                      "~/Scripts/moment.js",
+                      "~/Scripts/angular-moment.js"
                       ));
             bundles.Add(new ScriptBundle("~/bundles/js-client").Include(
                       "~/Client/init/*.js",
