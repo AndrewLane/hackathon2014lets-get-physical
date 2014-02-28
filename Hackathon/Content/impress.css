@@ -404,6 +404,24 @@ a:focus {
 
 }
 
+.present .rotating-full {
+    -webkit-transform: rotateX(0deg);
+    -moz-transform:    rotateX(0deg);
+    -ms-transform:     rotateX(0deg);
+    -o-transform:      rotateX(0deg);
+    transform:         rotateX(0deg);
+}
+
+
+.rotating-full {
+    -webkit-transform: rotateX(180deg);
+    -moz-transform:    rotateX(180deg);
+    -ms-transform:     rotateX(180deg);
+    -o-transform:      rotateX(180deg);
+    transform:         rotateX(180deg);
+}
+
+
 
 .present .scaling-up {
     display: inline-block;
