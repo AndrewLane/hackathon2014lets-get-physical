@@ -47,10 +47,12 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
         method: 'send',
         link: 'http://hackathonletsgetphysical.apphb.com/Client/partials/send_message_static.html',
         to: friendID()
-      })
+      });
+      $scope.recordAction();
     };
 
     $scope.suggestActivity = function () {
+      $scope.recordAction();
       $state.transitionTo("suggest", { index: $scope.friendInfoCards.FriendId });
     };
 
@@ -67,6 +69,7 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
       var statusId = $scope.userExtraInfo.LastStatusId;
       FB.api('/' + statusId + '/likes','post',function(response) {});
       $scope.alreadyliked_bool = true;
+      $scope.recordAction();
     }
 
   });
