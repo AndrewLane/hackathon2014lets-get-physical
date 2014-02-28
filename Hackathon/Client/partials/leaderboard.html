@@ -1,29 +1,6 @@
-﻿<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="dropdown-menu" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><img src="/Images/lgp_mini.png"></a>
-        </div>
-        <div class="collapse navbar-collapse">
-
-         <ul class="nav navbar-nav">
-            <li>
-              <a ng-click="logout();" href="#">Logout</a>
-            </li>
-
-          </ul>
-
-        </div>
-        <!--/.nav-collapse -->
-    </div>
-</div>
-<div ng-show="friendInfoCards" class="container">
+﻿<div ng-show="friendInfoCards" class="container">
 <div ng-hide="friendInfoCards">
-    <i class="fa-spinner icon-animate"></i>
+    <i class="fa fa-spinner icon-animate"></i>
 </div>
 <span class="label label-primary">{{friendInfoCards.TotalInteractionScore}}</span>
     <h5 style="display:inline-flex;">
@@ -64,4 +41,5 @@
             </li>
         </ul>
     </div>
+</div>
 

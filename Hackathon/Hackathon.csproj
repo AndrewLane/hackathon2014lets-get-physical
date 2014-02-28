@@ -137,6 +137,7 @@
     <Compile Include="Common\AuthController.cs" />
     <Compile Include="Common\AuthToken.cs" />
     <Compile Include="Controllers\FaceBookHelper.cs" />
+    <Compile Include="Controllers\FriendController.cs" />
     <Compile Include="Controllers\FriendsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginTestController.cs" />
