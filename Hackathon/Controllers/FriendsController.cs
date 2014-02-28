@@ -21,7 +21,6 @@ namespace Hackathon.Controllers
                                 FullName = friend.name,
                                 VirtualInteractionScore = friend.virtualRank,
                                 PhysicalInteractionScore = friend.physicalRank,
-                                LastSocialUpdateMetadata = "Loading...",
                                 ProfilePictureImagePath = friend.pic_big,
                                 LastInteractionTime = friend.lastInteractionTime
                             })
