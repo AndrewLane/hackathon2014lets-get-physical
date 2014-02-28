@@ -49,9 +49,10 @@ var ActivitySet =
 
 
 
+
 (function () {
-  angular.module('hackathon').controller('Suggest', ['$scope', '$http', '$timeout', '$stateParams', 'FacebookAuth', 'UserInfoCache', Suggest]);
-  function Suggest($scope, $http, $timeout, $stateParams, FacebookAuth, UserInfoCache) {
+  angular.module('hackathon').controller('Suggest', ['$scope', '$http', '$timeout', '$stateParams', 'FacebookAuth', 'UserInfoCache', '$modal', Suggest]);
+  function Suggest($scope, $http, $timeout, $stateParams, FacebookAuth, UserInfoCache, $modal) {
     FacebookAuth.withAuth().then(function () {
       //      $http.get('/api/friend/' + $stateParams.index).success(function (data) {
       //        $scope.userInfo = data;
@@ -75,6 +76,28 @@ var ActivitySet =
           });
         })
       });
+
+      function EventModal($scope, activity, $modalInstance) {
+        $scope.create = function () {
+          $modalInstance.close();
+        };
+        $scope.cancel = function () {
+          $modalInstance.close();
+        };
+      }
+
+      $scope.createEvent = function (i) {
+        var modalInstance = $modal.open({
+          templateUrl: '/Client/partials/create_event_modal.html',
+          controller: EventModal,
+          resolve: {
+            activity: function () {
+              return $scope.activities[i];
+            }
+          }
+        });
+      };
+
       //      });
     });
   }
