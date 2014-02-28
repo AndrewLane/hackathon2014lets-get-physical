@@ -162,9 +162,11 @@
     <Content Include="Client\js\logintest.js" />
     <Content Include="Client\js\test.js" />
     <Content Include="Client\partials\friend.html" />
+    <Content Include="Client\partials\hangout_static.html" />
     <Content Include="Client\partials\home.html" />
     <Content Include="Client\partials\leaderboard.html" />
     <Content Include="Client\partials\logintest.html" />
+    <Content Include="Client\partials\send_message_static.html" />
     <Content Include="Client\partials\test.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\impress.css" />

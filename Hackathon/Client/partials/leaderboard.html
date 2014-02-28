@@ -1,11 +1,10 @@
 ﻿<div ng-show="friendInfoCards" class="container">
 <div ng-hide="friendInfoCards">
-    <i class="fa fa-spinner icon-animate"></i>
-</div>
-<span class="label label-primary">{{friendInfoCards.TotalInteractionScore}}</span>
-    <h5 style="display:inline-flex;">
+    <i class="fa fa-spinner icon-animate"></i></div>
+<span class="label label-primary">{{friendInfoCards.FriendRank}}</span>
+    <h3 style="display:inline-flex;">
         {{friendInfoCards.FullName}}
-    </h5>
+    </h3>
     <div>
         {{friendInfoCards.LastSocialUpdateMetadata}}
     </div>
@@ -22,15 +21,20 @@
             </td>
           </tr>
           <tr>
-            <td><span class="label label-success">{{friendInfoCards.PhysicalInteractionScore}}</span></td>
-            <td><span class="label label-danger">{{friendInfoCards.VirtualInteractionScore}}</span></td>
+            <td><span class="label label-danger" ng-class="{label-success : friendInfoCards.PhysicalInteractionScore 
+            >= friendInfoCards.VirtualInteractionScore">{{friendInfoCards.PhysicalInteractionScore}}
+            </span>
+            </td>
+            <td><span class="label label-success" ng-class="{label-danger : friendInfoCards.PhysicalInteractionScore
+            >= friendInfoCards.VirtualInteractionScore">{{friendInfoCards.VirtualInteractionScore}}
+            </span></td>
           </tr>
         </tbody>
       </table>
 
         <a class="btn btn-success" ng-click="sendMessage()">Send Message</a> <br>
 
-        <span class="muted">You were last in touch with {{friendInfoCards.FullName}} 3 days ago</span>
+        <span class="muted">You were last in touch with {{friendInfoCards.FullName}} {{friendInfoCards.LastInteractionTime}}</span>
     </div>
     <hr>
     <div class="center">

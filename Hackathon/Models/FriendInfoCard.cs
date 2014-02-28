@@ -46,5 +46,10 @@ namespace Hackathon.Models
         /// The last time we interacted with this friend
         /// </summary>
         public DateTime? LastInteractionTime { get; set; }
+
+        /// <summary>
+        /// How this friend ranks in your list of friends
+        /// </summary>
+        public int FriendRank { get; set; }
     }
 }

@@ -23,7 +23,7 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
     $scope.sendMessage = function() {
       FB.ui({
           method:'send',
-          link:'http://hackathonletsgetphysical.apphb.com',
+          link:'http://hackathonletsgetphysical.apphb.com/Client/partials/send_message_static.html',
           to:friendID()
       });
 
