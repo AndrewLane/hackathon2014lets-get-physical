@@ -1,4 +1,6 @@
-﻿namespace Hackathon.Models
+﻿using System;
+
+namespace Hackathon.Models
 {
     /// <summary>
     /// Models the information shows on the friend leaderboard screen
@@ -39,5 +41,10 @@
         /// Sum of virtual and physical interaction scores
         /// </summary>
         public int TotalInteractionScore { get { return PhysicalInteractionScore + VirtualInteractionScore; } }
+
+        /// <summary>
+        /// The last time we interacted with this friend
+        /// </summary>
+        public DateTime? LastInteractionTime { get; set; }
     }
 }
