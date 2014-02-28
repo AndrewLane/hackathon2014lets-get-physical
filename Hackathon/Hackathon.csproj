@@ -161,6 +161,7 @@
     <Content Include="Client\js\logintest.js" />
     <Content Include="Client\js\test.js" />
     <Content Include="Client\partials\friend.html" />
+    <Content Include="Client\partials\hangout_static.html" />
     <Content Include="Client\partials\home.html" />
     <Content Include="Client\partials\leaderboard.html" />
     <Content Include="Client\partials\logintest.html" />
