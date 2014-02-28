@@ -21,8 +21,9 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
           FB.api('/' + statusId + '/likes',function(response) {
               $scope.$apply(function() {
                   var aliked_tmp = false;
-                  for(i=0;i<response.length;i++) {
-                      if(response.id === $http.defaults.headers.common['FacebookUserId']) {
+                  var responseData = response.data
+                  for(i=0;i<responseData.length;i++) {
+                      if(responseData[i].id === $http.defaults.headers.common['FacebookUserId']) {
                           aliked_tmp = true;
                       }
                   }
@@ -60,7 +61,7 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
 
     $scope.like = function() {
       var statusId = $scope.userExtraInfo.LastStatusId;
-      FB.api('/' + statusId + '/likes','post');
+      FB.api('/' + statusId + '/likes','post',function(response) {});
       $scope.alreadyliked = true;
     }
 
