@@ -1,6 +1,6 @@
 ﻿   <div  ng-swipe-left="gotoNext()" ng-swipe-right="gotoPrevious()">
 ﻿    <div class="center" ng-hide="friendInfoCards">
-        <i class="fa fa-spinner fa-5x fa-spin"></i>
+        <i class="fa fa-spinner fa-5x fa-spin">Looking for Friendships to Improve</i>
     </div>
     <div class="center" ng-show="friendInfoCards">
         <ul class="pagination">
@@ -10,8 +10,8 @@
             </li>
         </ul>
     </div>
-    <h4>Start becoming a better friend</h4>
-    <span class="label label-primary pull-right">{{ getActionCount() }} Improvements</span>
+    <span style="font-size:20px;">Start becoming a better friend
+    <span class="label label-primary pull-right">{{ getActionCount() }} Improvements</span> </span>
     <div ng-show="friendInfoCards" class="well">
     <span class="label label-primary"># {{friendInfoCards.FriendRank}}</span>
     <h4 style="display:inline-flex;">
@@ -68,8 +68,8 @@
     </div>
    
     <hr>
-    
-    <a class="btn btn-link btn-small" ng-click="logout();" href="#">Logout</a>
-
-</div> </div>
+   
+</div> 
+<a class="btn btn-link btn-small" ng-click="logout();" href="#">Logout</a>        
+</div>
 
