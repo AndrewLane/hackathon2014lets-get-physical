@@ -53,4 +53,5 @@ text-align:center;
 .icon-animate {
     webkit-animation: spin 2s infinite linear;
     font-size:20px;
+    display:inline-block;
 }
