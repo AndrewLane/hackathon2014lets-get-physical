@@ -14,7 +14,11 @@
         var hey = !!$http.defaults.headers.common['FacebookUserId'];
         console.log(hey);
         return hey;
+      },
+      LogUserOut: function () {
+        delete $http.defaults.headers.common['FacebookUserId'];
       }
+
     };
   }
 }());
