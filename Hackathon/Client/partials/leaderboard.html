@@ -1,7 +1,8 @@
-﻿<div ng-show="friendInfoCards" class="container">
+
     <div ng-hide="friendInfoCards">
-        <i class="fa fa-spinner icon-animate"></i>
+        <i class="fa fa-spinner fa-spin"></i>
     </div>
+    <div ng-show="friendInfoCards" class="container">
     <span class="label label-primary">{{friendInfoCards.FriendRank}}</span>
     <h3 style="display:inline-flex;">
         {{friendInfoCards.FullName}}
