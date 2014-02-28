@@ -9,7 +9,14 @@ namespace Hackathon.Controllers
         {
             var fbHelper = new FaceBookHelper(AuthToken, UserId);
             var friend = fbHelper.GetFriendExtendedInfo(id);
-            return friend != null ? new FriendExtraInfo {LastStatusUpdate = friend.message} : null;
+            return friend != null
+                ? new FriendExtraInfo
+                {
+                    LastStatusUpdate = friend.message,
+                    LastStatusId = friend.message_id,
+                    LastStatusUpdateDateTime = friend.message_datetime
+                }
+                : null;
         }
     }
 }
