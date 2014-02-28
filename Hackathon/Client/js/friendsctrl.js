@@ -1,50 +1,41 @@
-angular.module( 'hackathon').controller( 'GetInfoCards', function ( $scope, $http, $stateParams, FacebookAuth )
-{
+angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, $stateParams, FacebookAuth) {
   FacebookAuth.withAuth().then(function () {
     var fInd = $stateParams.index || '';
-	
-    if ((fInd === '') || (fInd === 0))
-    {
+    $scope.index = parseInt(fInd);
+
+    if ((fInd === '') || (fInd === 0)) {
       // get all
-      $http.get( '/api/friends/' ).success( function ( data )
-      {
+      $http.get('/api/friends/').success(function (data) {
         $scope.friendInfoCards = data;
-      } );
+      });
     }
-    else
-    {
+    else {
       // get specific
-      $http.get( '/api/friends/' + fInd ).success( function ( data )
-      {
-        $scope.friendInfoCards = data;
-      } );
-	
+      $http.get('/api/friends/' + fInd).then(function (response) {
+        $scope.friendInfoCards = response.data;
+      }, function () {
+        $state.transitionTo("/leaderboard", { index: 1 });
+      });
     }
   });
 });
 
-angular.module( 'hackathon').controller( 'GetExtraInfo', function ( $scope, $http, $stateParams, FacebookAuth )
-{
+angular.module('hackathon').controller('GetExtraInfo', function ($scope, $http, $stateParams, FacebookAuth) {
   FacebookAuth.withAuth().then(function () {
-	$http.get( '/api/friend/' + $stateParams.uid ).success( function ( data )
-	{
-		$scope.userExtaInfo = data;
-	} );
+    $http.get('/api/friend/' + $stateParams.uid).success(function (data) {
+      $scope.userExtaInfo = data;
+    });
   });
 });
 
-angular.module('hackathon').controller('NotifyFriend', function ($scope, $http, $stateParams) 
-{
+angular.module('hackathon').controller('NotifyFriend', function ($scope, $http, $stateParams) {
+  var toAdd = $stateParams.toAdd || '';
+  var msg = $stateParams.toMsg || 'Hello there';
 
-	var toAdd = $stateParams.toAdd || '';
-	var msg = $stateParams.toMsg || 'Hello there';
-	
-	$scope.notifyFriendSuccess = false;
-	
-	$http.get( '/api/notifyfriend/' + toAdd + '/' + msg ).success( function ( data )
-	{
-		$scope.notifyFriendSuccess = true;
-	} );
+  $scope.notifyFriendSuccess = false;
 
+  $http.get('/api/notifyfriend/' + toAdd + '/' + msg).success(function (data) {
+    $scope.notifyFriendSuccess = true;
+  });
 });
 
