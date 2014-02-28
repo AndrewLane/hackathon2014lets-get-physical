@@ -18,7 +18,7 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
       });
     }
     $scope.sendMessage = function() {
-      var friendID = $scope.friendInfoCards.FriendID;
+      var friendID = function() {return $scope.friendInfoCards.FriendID;}();
       FB.ui({
           method:'send',
           link:'http://google.com/',
