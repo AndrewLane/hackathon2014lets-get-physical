@@ -1,6 +1,6 @@
 ﻿<div ng-swipe-left="gotoNext()" ng-swipe-right="gotoPrevious()">
     ﻿    <div class="center" ng-hide="friendInfoCards">
-        <i class="fa fa-spinner fa-5x fa-spin"></i>Looking for Friendships to Improve
+        <i class="fa fa-spinner fa-5x fa-spin"></i> <p>Looking for Friendships to Improve</p>
     </div>
     <div class="center" ng-show="friendInfoCards">
         <ul class="pagination">
@@ -11,8 +11,8 @@
         </ul>
     </div>
     <span style="font-size:20px;">
-        Start becoming a better friend
-        <span class="pull-right">Imrpovements:<span class="badge badge-success pull-right">{{ getActionCount() }}</span>
+        Start becoming a better friend</span>
+        <span class="pull-right">Friendship Points:<span class="badge-success pull-right">{{ getActionCount() }}</span>
     </span>
     <div ng-show="friendInfoCards" class="well">
         <span class="label label-primary"># {{friendInfoCards.FriendRank}}</span>
