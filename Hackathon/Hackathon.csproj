@@ -144,8 +144,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CheckIn.cs" />
+    <Compile Include="Models\CheckinResult.cs" />
+    <Compile Include="Models\CommentResult.cs" />
+    <Compile Include="Models\Friend.cs" />
+    <Compile Include="Models\FriendExtendedInfo.cs" />
     <Compile Include="Models\FriendExtraInfo.cs" />
     <Compile Include="Models\FriendInfoCard.cs" />
+    <Compile Include="Models\LastMessage.cs" />
+    <Compile Include="Models\LikeData.cs" />
+    <Compile Include="Models\LikeFriend.cs" />
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\Place.cs" />
+    <Compile Include="Models\RankedFriend.cs" />
+    <Compile Include="Models\RunningTotals.cs" />
+    <Compile Include="Models\Status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

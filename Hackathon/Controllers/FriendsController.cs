@@ -25,6 +25,7 @@ namespace Hackathon.Controllers
                                 LastInteractionTime = friend.lastInteractionTime
                             })
                     .OrderByDescending(friend => friend.TotalInteractionScore)
+                    .ThenBy(friend => friend.FullName)
                     .ToList();
 
             if (allFriends.Any() == false)
