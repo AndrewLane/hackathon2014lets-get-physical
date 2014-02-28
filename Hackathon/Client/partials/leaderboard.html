@@ -2,7 +2,7 @@
 <div ng-hide="friendInfoCards">
     <i class="fa fa-spinner icon-animate"></i>
 </div>
-<span class="label label-primary">{{index}}</span>
+<span class="label label-primary">{{friendInfoCards.FriendRank}}</span>
     <h3 style="display:inline-flex;">
         {{friendInfoCards.FullName}}
     </h3>
@@ -22,14 +22,14 @@
             </td>
           </tr>
           <tr>
-            <td><span ng-class="label label-success : {{friendInfoCards.PhysicalInteractionScore}} 
-            >= {{friendInfoCards.VirtualInteractionScore}}, label label-danger: 
-            {{friendInfoCards.PhysicalInteractionScore}} < {{friendInfoCards.VirtualInteractionScore}}"{{friendInfoCards.PhysicalInteractionScore}}>
+            <td><span class="label" ng-class="{label label-success : friendInfoCards.PhysicalInteractionScore 
+            >= friendInfoCards.VirtualInteractionScore, label-danger: 
+            friendInfoCards.PhysicalInteractionScore < friendInfoCards.VirtualInteractionScore}">{{friendInfoCards.PhysicalInteractionScore}}
             </span>
             </td>
-            <td><span ng-class="label label-danger : {{friendInfoCards.PhysicalInteractionScore}} 
-            >= {{friendInfoCards.VirtualInteractionScore}}, label label-success: 
-            {{friendInfoCards.PhysicalInteractionScore}} < {{friendInfoCards.VirtualInteractionScore}}" {{friendInfoCards.VirtualInteractionScore}}>
+            <td><span class="label" ng-class="{label label-danger : friendInfoCards.PhysicalInteractionScore
+            >= friendInfoCards.VirtualInteractionScore, label label-success: 
+            friendInfoCards.PhysicalInteractionScore < friendInfoCards.VirtualInteractionScore">{{friendInfoCards.VirtualInteractionScore}}
             </span></td>
           </tr>
         </tbody>

@@ -51,7 +51,9 @@ namespace Hackathon.Controllers
             {
                 id = allFriends.Count();
             }
-            return allFriends[id - 1];
+            var friendToReturn = allFriends[id - 1];
+            friendToReturn.FriendRank = id;
+            return friendToReturn;
         }
 
         // POST api/friends
