@@ -1,3 +1,4 @@
+﻿   <div  ng-swipe-left="gotoNext()" ng-swipe-right="gotoPrevious()">
 ﻿    <div class="center" ng-hide="friendInfoCards">
         <i class="fa fa-spinner fa-5x fa-spin"></i>
     </div>
@@ -19,11 +20,12 @@
     </div>
     <div ng-show"userExtraInfo.LastStatusUpdate">
         {{userExtraInfo.LastStatusUpdate}}
-        <a ng-show="!alreadyliked()" ng-click="like()"><img src="/Images/like_button.jpg"></a>
-        <img ng-show="alreadyliked()" src="/Images/liked_button.jpg">
+        <a ng-show="!alreadyliked()" ng-click="like()" class="btn btn-link btn-mini">
+        <i class="fa fa-thumbs-up"></i>Like</a>
+        <a ng-show="alreadyliked()" class ="btn btn-mini btn-link disabled">Liked</a>
 
     </div>
-    <div class="center" ng-swipe-left="gotoNext()" ng-swipe-right="gotoPrevious()">
+    <div class="center">
         <img src="{{friendInfoCards.ProfilePictureImagePath}}" style="padding-bottom:10px;">
         <table class="table">
             <tbody>
@@ -56,9 +58,10 @@
         <span ng-show="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}} <span am-time-ago="friendInfoCards.LastInteractionTime"></span></span>
         <span ng-hide="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}}</span> <span class="label label-timedanger">Ages Ago!</span>
     </div>
+   
     <hr>
     
     <a class="btn btn-link btn-small" ng-click="logout();" href="#">Logout</a>
 
-</div>
+</div> </div>
 
