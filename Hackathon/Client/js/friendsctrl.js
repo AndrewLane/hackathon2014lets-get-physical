@@ -2,6 +2,7 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
   FacebookAuth.withAuth().then(function () {
     var fInd = $stateParams.index || '';
     $scope.index = parseInt(fInd);
+    $scope.alreadyliked = false;
 
     if ((fInd === '') || (fInd === 0)) {
       // get all
@@ -16,6 +17,18 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
         UserInfoCache.put(response.data.FriendId, response.data);
         $http.get('/api/friend/' + $scope.friendInfoCards.FriendId).success(function (data) {
           $scope.userExtraInfo = data;
+          var statusId = $scope.userExtraInfo.LastStatusId;
+          FB.api('/' + statusId + '/likes',function(response) {
+              $scope.apply(function() {
+                  var aliked_tmp = false;
+                  for(i=0;i<response.length;i++) {
+                      if(response.id === $http.defaults.headers.common['FacebookUserId']) {
+                          aliked_tmp = true;
+                      }
+                  }
+                  $scope.alreadyliked = aliked_tmp;
+              });
+          });
         });
       }, function () {
         $state.transitionTo("leaderboard", { index: 1 });
@@ -47,7 +60,8 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
 
     $scope.like = function() {
       var statusId = $scope.userExtraInfo.LastStatusId;
-      FB.api('/' + statusId + '/likes',{method:'post'});
+      FB.api('/' + statusId + '/likes','post');
+      $scope.alreadyliked = true;
     }
 
   });

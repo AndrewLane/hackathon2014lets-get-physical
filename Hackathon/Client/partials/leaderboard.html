@@ -8,7 +8,8 @@
     </h3> is
     <div>
         {{userExtraInfo.LastStatusUpdate}}
-        <a class="btn btn-primary" ng-click="like()">Logout</a>
+        <a ng-show="!alreadyliked()" ng-click="like()"><img src="/Images/like_button.jpg"></a>
+        <img ng-show="alreadyliked()" src="/Images/liked_button.jpg">
     </div>
     <div class="center" ng-swipe-left="gotoNext()" ng-swipe-right="gotoPrevious()">
         <img src="{{friendInfoCards.ProfilePictureImagePath}}" style="padding-bottom:10px;">
