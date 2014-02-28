@@ -1,10 +1,10 @@
 ﻿<div class="container">
     <div ng-show="!done">
-        <img src="/Images/ajax_load.gif" /><br />
-        <span>Loading user's information...</span><span ng-show="userInfo && step > 0">Done</span><br />
-        <span ng-show="userInfo && step > 0">Analyzing shared interests between you and {{userInfo.FullName}}...</span><span ng-show="step > 1">Done!</span><br />
-        <span ng-show="step > 1">Gathering available options...</span><span ng-show="step > 2">Done!</span><br />
-        <span ng-show="step > 2">Curating and finalizing Suggestions...</span><br />
+        <i class="fa-spinner fa-spin fa-5x"/><br />
+        <span>Learning about you...</span><span ng-show="userInfo && step > 0">Done</span><br />
+        <span ng-show="userInfo && step > 0">Learning about you and {{userInfo.FullName}}...</span><span ng-show="step > 1">Done!</span><br />
+        <span ng-show="step > 1">Curating events...</span><span ng-show="step > 2">Done!</span><br />
+        <span ng-show="step > 2">Finalizing suggestions for getting physical...</span><br />
     </div>
     <div ng-show="done">
         <div class="row">
