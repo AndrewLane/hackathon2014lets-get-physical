@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 (function () {
-  var appModule = angular.module('hackathon', ['ui.router', 'ngTouch', 'ui.bootstrap']);
+  var appModule = angular.module('hackathon', ['ui.router', 'ngTouch', 'ui.bootstrap', 'angularMoment']);
   appModule.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', routeConfig]);
   function routeConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(false).hashPrefix('');
