@@ -9,7 +9,7 @@
     <div>
         {{friendInfoCards.LastSocialUpdateMetadata}}
     </div>
-    <div class="center">
+    <div class="center" ng-swipe-left="gotoNext()" ng-swipe-right="gotoPrevious()">
         <img src="{{friendInfoCards.ProfilePictureImagePath}}" style="padding-bottom:10px;">
         <table class="table">
             <tbody>

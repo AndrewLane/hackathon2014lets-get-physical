@@ -19,7 +19,7 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
       });
     }
     function friendID() {
-        return $scope.friendInfoCards.FriendId;
+      return $scope.friendInfoCards.FriendId;
     }
     $scope.sendMessage = function () {
       FB.ui({
@@ -32,6 +32,16 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
     $scope.suggestActivity = function () {
       $state.transitionTo("suggest", { index: $scope.friendInfoCards.FriendId });
     };
+
+    $scope.gotoPrevious = function () {
+      if ($scope.index > 1) {
+        $state.transitionTo("leaderboard", { index: $scope.index - 1 });
+      }
+    }
+    $scope.gotoNext = function () {
+      $state.transitionTo("leaderboard", { index: $scope.index + 1 });
+    }
+
 
   });
 });

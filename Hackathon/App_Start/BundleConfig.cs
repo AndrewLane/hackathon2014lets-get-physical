@@ -26,6 +26,7 @@ namespace Hackathon
 
             bundles.Add(new ScriptBundle("~/bundles/angular-libs").Include(
                       "~/Scripts/angular.js",
+                      "~/Scripts/angular-touch.js",
                       "~/Scripts/AngularUI/ui-router.js",
                       "~/Scripts/ui-bootstrap-tpls-0.10.0.js"
                       ));
