@@ -1,14 +1,13 @@
-
     <div ng-hide="friendInfoCards">
-        <i class="fa fa-spinner fa-spin"></i>
+        <i class="fa fa-spinner fa-5x fa-spin"></i>
     </div>
     <div ng-show="friendInfoCards" class="container">
-    <span class="label label-primary">{{friendInfoCards.FriendRank}}</span>
+    <span class="label label-primary"># {{friendInfoCards.FriendRank}}</span>
     <h3 style="display:inline-flex;">
         {{friendInfoCards.FullName}}
     </h3>
     <div>
-        {{friendInfoCards.LastSocialUpdateMetadata}}
+        {{userExtraInfo.LastStatusUpdate}}
     </div>
     <div class="center" ng-swipe-left="gotoNext()" ng-swipe-right="gotoPrevious()">
         <img src="{{friendInfoCards.ProfilePictureImagePath}}" style="padding-bottom:10px;">
