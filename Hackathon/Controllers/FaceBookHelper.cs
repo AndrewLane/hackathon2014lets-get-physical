@@ -131,6 +131,12 @@ namespace Hackathon.Controllers
 
         }
 
+        public Friend GetFriend(string uid)
+        {
+            var friend = ExecuteFQL<Friend>("SELECT uid, name, pic_big FROM user WHERE uid = '" + uid + "'");
+            return friend.FirstOrDefault();
+        }
+
         public List<Friend> GetFriends()
         {
             var friends = ExecuteFQL<Friend>("SELECT uid, name, pic_big FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) ");

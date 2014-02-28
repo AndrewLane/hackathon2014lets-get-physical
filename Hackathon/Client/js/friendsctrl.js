@@ -23,7 +23,7 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
 angular.module('hackathon').controller('GetExtraInfo', function ($scope, $http, $stateParams, FacebookAuth) {
   FacebookAuth.withAuth().then(function () {
     $http.get('/api/friend/' + $stateParams.uid).success(function (data) {
-      $scope.userExtaInfo = data;
+      $scope.userExtraInfo = data;
     });
   });
 });
