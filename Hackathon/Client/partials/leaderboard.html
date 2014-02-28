@@ -1,6 +1,6 @@
-﻿   <div  ng-swipe-left="gotoNext()" ng-swipe-right="gotoPrevious()">
-﻿    <div class="center" ng-hide="friendInfoCards">
-        <i class="fa fa-spinner fa-5x fa-spin">Looking for Friendships to Improve</i>
+﻿<div ng-swipe-left="gotoNext()" ng-swipe-right="gotoPrevious()">
+    ﻿    <div class="center" ng-hide="friendInfoCards">
+        <i class="fa fa-spinner fa-5x fa-spin"></i>Looking for Friendships to Improve
     </div>
     <div class="center" ng-show="friendInfoCards">
         <ul class="pagination">
@@ -10,66 +10,70 @@
             </li>
         </ul>
     </div>
-    <span style="font-size:20px;">Start becoming a better friend
-    <span class="label label-primary pull-right">{{ getActionCount() }} Improvements</span> </span>
+    <span style="font-size:20px;">
+        Start becoming a better friend
+        <span class="label label-primary pull-right">{{ getActionCount() }} Improvements</span>
+    </span>
     <div ng-show="friendInfoCards" class="well">
-    <span class="label label-primary"># {{friendInfoCards.FriendRank}}</span>
-    <h4 style="display:inline-flex;">
-        {{friendInfoCards.FullName}}
-    </h4> is
-    <div ng-hide="userExtraInfo">
-    <i class="fa fa-spinner fa-spin"></i>
-    </div>
- 
-    <div ng-show="userExtraInfo.LastStatusUpdate">
-        {{userExtraInfo.LastStatusUpdate}}
-        <a ng-show="!alreadyliked()" ng-click="like()" class="btn btn-link btn-mini">
-        <i class="fa fa-thumbs-up"></i>Like</a>
-        <a ng-show="alreadyliked()" class ="btn btn-mini btn-link disabled">Liked</a>
-    </div>
-    
-    <div ng-show="userExtraInfo && !userExtraInfo.LastStatusUpdate">
-    <span>MIA on facebook! <a class="btn btn-link btn-mini" ng-click="sendMessage()"><i class="fa fa-comment"></i></i>Say hello!</a></span>
-    </div>
-    <div class="center">
-        <img src="{{friendInfoCards.ProfilePictureImagePath}}" style="padding-bottom:10px;">
-        <table class="table">
-            <tbody>
-                <tr>
-                    <td>
-                        Face to Face
-                    </td>
-                    <td>
-                        Facebook
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span class="label label-success" ng-class="{'label-danger': friendInfoCards.PhysicalInteractionScore < friendInfoCards.VirtualInteractionScore }" >
-                            {{friendInfoCards.PhysicalInteractionScore}}
-                        </span>
-                    </td>
-                    <td>
-                        <span class="label label-success" ng-class="{'label-danger' : friendInfoCards.PhysicalInteractionScore >= friendInfoCards.VirtualInteractionScore }" >
-                            {{friendInfoCards.VirtualInteractionScore}}
-                        </span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <span class="label label-primary"># {{friendInfoCards.FriendRank}}</span>
+        <h4 style="display:inline-flex;">
+            {{friendInfoCards.FullName}}
+        </h4> is
+        <div ng-hide="userExtraInfo">
+            <i class="fa fa-spinner fa-spin"></i>
+        </div>
 
-        <a class="btn btn-default" ng-click="suggestActivity()"><img src="/Images/lgp_small.png" style="height:20px; width:20px;"></img>Get Physical</a>
-        <a class="btn btn-success" ng-click="sendMessage()">Send Message</a> <br>
+        <div ng-show="userExtraInfo.LastStatusUpdate">
+            {{userExtraInfo.LastStatusUpdate}}
+            <a ng-show="!alreadyliked()" ng-click="like()" class="btn btn-link btn-mini">
+                <i class="fa fa-thumbs-up"></i>Like
+            </a>
+            <a ng-show="alreadyliked()" class="btn btn-mini btn-link disabled">Liked</a>
+        </div>
 
-        <span ng-show="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}} 
-        <span am-time-ago="friendInfoCards.LastInteractionTime" class="label label-timedanger"></span></span>
-        <span ng-hide="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}} <span class="label label-timedanger">Ages Ago!</span></span>
-        
+        <div ng-show="userExtraInfo && !userExtraInfo.LastStatusUpdate">
+            <span>MIA on facebook! <a class="btn btn-link btn-mini" ng-click="sendMessage()"><i class="fa fa-comment"></i></i>Say hello!</a></span>
+        </div>
+        <div class="center">
+            <img src="{{friendInfoCards.ProfilePictureImagePath}}" style="padding-bottom:10px;">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>
+                            Face to Face
+                        </td>
+                        <td>
+                            Facebook
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="label label-success" ng-class="{'label-danger': friendInfoCards.PhysicalInteractionScore < friendInfoCards.VirtualInteractionScore }">
+                                {{friendInfoCards.PhysicalInteractionScore}}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="label label-success" ng-class="{'label-danger' : friendInfoCards.PhysicalInteractionScore >= friendInfoCards.VirtualInteractionScore }">
+                                {{friendInfoCards.VirtualInteractionScore}}
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <a class="btn btn-default" ng-click="suggestActivity()"><img src="/Images/lgp_small.png" style="height:20px; width:20px;"></img>Get Physical</a>
+            <a class="btn btn-success" ng-click="sendMessage()">Send Message</a> <br>
+
+            <span ng-show="friendInfoCards.LastInteractionTime" class="muted">
+                You were last in touch with {{friendInfoCards.FullName}}
+                <span am-time-ago="friendInfoCards.LastInteractionTime" class="label label-timedanger"></span>
+            </span>
+            <span ng-hide="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}} <span class="label label-timedanger">Ages Ago!</span></span>
+
+        </div>
+
+        <hr>
+
     </div>
-   
-    <hr>
-   
-</div> 
-<a class="btn btn-link btn-small" ng-click="logout();" href="#">Logout</a>        
+    <a class="btn btn-link btn-small" ng-click="logout();" href="#">Logout</a>
 </div>
-
