@@ -222,13 +222,18 @@ namespace Hackathon.Controllers
             {
                 friendInfo.birthday = lc.data[0].birthday;
                 friendInfo.location = new Location();
-                friendInfo.location.city = lc.data[0].current_location.city == null ? null : lc.data[0].current_location.city.Value;
-                friendInfo.location.country = lc.data[0].current_location.country == null ? null : lc.data[0].current_location.country.Value;
-                friendInfo.location.latitude = lc.data[0].current_location.latitude == null ? 0 : (decimal)(lc.data[0].current_location.latitude.Value);
-                friendInfo.location.longitude = lc.data[0].current_location.longitude == null ? 0 : (decimal)(lc.data[0].current_location.longitude.Value);
-                friendInfo.location.state = lc.data[0].current_location.state == null ? null : lc.data[0].current_location.state.Value;
-                friendInfo.location.street = lc.data[0].current_location.street == null ? null : lc.data[0].current_location.street.Value;
-                friendInfo.location.zip = lc.data[0].current_location.zip == null ? null : lc.data[0].current_location.zip.Value;
+
+                if(lc.data[0].current_location != null)
+                {
+                    friendInfo.location.city = lc.data[0].current_location.city == null ? null : lc.data[0].current_location.city.Value;
+                    friendInfo.location.country = lc.data[0].current_location.country == null ? null : lc.data[0].current_location.country.Value;
+                    friendInfo.location.latitude = lc.data[0].current_location.latitude == null ? 0 : (decimal)(lc.data[0].current_location.latitude.Value);
+                    friendInfo.location.longitude = lc.data[0].current_location.longitude == null ? 0 : (decimal)(lc.data[0].current_location.longitude.Value);
+                    friendInfo.location.state = lc.data[0].current_location.state == null ? null : lc.data[0].current_location.state.Value;
+                    friendInfo.location.street = lc.data[0].current_location.street == null ? null : lc.data[0].current_location.street.Value;
+                    friendInfo.location.zip = lc.data[0].current_location.zip == null ? null : lc.data[0].current_location.zip.Value;
+                }
+                
             }
 
             return friendInfo;
