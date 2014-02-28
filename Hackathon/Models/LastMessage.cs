@@ -4,5 +4,6 @@
     {
         public string uid;
         public string message;
+        public double time;
     }
 }
