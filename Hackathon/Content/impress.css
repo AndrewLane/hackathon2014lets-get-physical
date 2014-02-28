@@ -267,7 +267,7 @@ a:focus {
     transform:         translateZ(20px);
 }
 
-#title h1 {
+h1.big {
     font-size: 190px;
 
     -webkit-transform: translateZ(50px);
@@ -276,6 +276,17 @@ a:focus {
     -o-transform:      translateZ(50px);
     transform:         translateZ(50px);
 }
+
+h1.large {
+    font-size: 90px;
+
+    -webkit-transform: translateZ(50px);
+    -moz-transform:    translateZ(50px);
+    -ms-transform:     translateZ(50px);
+    -o-transform:      translateZ(50px);
+    transform:         translateZ(50px);
+}
+
 
 #title .footnote {
     font-size: 32px;
