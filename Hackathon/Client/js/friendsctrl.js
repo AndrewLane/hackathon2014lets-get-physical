@@ -25,12 +25,8 @@ angular.module( 'hackathon').controller( 'GetInfoCards', function ( $scope, $htt
 
 angular.module('hackathon').controller('NotifyFriend', function ($scope, $http, $stateParams) 
 {
-    FB.ui({
-      method: 'send',
-      link: 'http://www.google.com/',
-      to: $scope.friendInfoCards.FriendId
-    });
-	/*var toAdd = $stateParams.toAdd || '';
+
+	var toAdd = $stateParams.toAdd || '';
 	var msg = $stateParams.toMsg || 'Hello there';
 	
 	$scope.notifyFriendSuccess = false;
@@ -39,6 +35,6 @@ angular.module('hackathon').controller('NotifyFriend', function ($scope, $http, 
 	{
 		$scope.notifyFriendSuccess = true;
 	} );
-	*/
+	
 });
 
