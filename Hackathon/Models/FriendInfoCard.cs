@@ -34,5 +34,10 @@
         /// Numerical "virtual" interaction score with this friend
         /// </summary>
         public int VirtualInteractionScore { get; set; }
+
+        /// <summary>
+        /// Sum of virtual and physical interaction scores
+        /// </summary>
+        public int TotalInteractionScore { get { return PhysicalInteractionScore + VirtualInteractionScore; } }
     }
 }
