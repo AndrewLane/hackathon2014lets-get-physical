@@ -53,6 +53,21 @@ namespace Hackathon.Controllers
 
         }
 
+        protected dynamic ExecuteApiCall(string url)
+        {
+            var cacheKey = url;
+            return HttpContext.Current.Cache.GetOrAdd(cacheKey, () =>
+            {
+                var webClient = new WebClient();
+
+                var response = webClient.DownloadData(url);
+
+                dynamic resultOfConversion = JsonConvert.DeserializeObject((System.Text.Encoding.Default.GetString(response)));
+
+                return resultOfConversion;
+            });
+        }
+
         protected List<Friend> GetFriends()
         {
             var friends = ExecuteFQL<Friend>("SELECT uid, name, pic_big FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) ");
@@ -71,6 +86,13 @@ namespace Hackathon.Controllers
             string fql = System.Web.HttpUtility.UrlEncode(FQL);
 
             return ExecuteApiCall<T>(string.Format("https://graph.facebook.com/fql?q={0}&access_token={1}", fql, _authToken));
+        }
+
+        protected dynamic ExecuteFQL(string FQL)
+        {
+            string fql = System.Web.HttpUtility.UrlEncode(FQL);
+
+            return ExecuteApiCall(string.Format("https://graph.facebook.com/fql?q={0}&access_token={1}", fql, _authToken));
         }
 
         protected List<FriendPhoto> GetFriendPhotosImTaggedIn()
@@ -187,12 +209,26 @@ namespace Hackathon.Controllers
             var friendInfo = new FriendExtendedInfo();
 
             LastMessage lm = ExecuteFQL<LastMessage>("SELECT status_id, uid, message, time FROM status WHERE uid = " + uid + " ORDER BY time DESC LIMIT 1").FirstOrDefault();
-
+            dynamic lc = ExecuteFQL("SELECT birthday, current_location from user where uid = " + uid);
+            
             if (lm != null)
             {
                 friendInfo.message = lm.message;
                 friendInfo.message_datetime = UnixTimeStampToDateTime(lm.time);
                 friendInfo.message_id = lm.status_id;
+            }
+
+            if(lc != null && lc.data != null)
+            {
+                friendInfo.birthday = lc.data[0].birthday;
+                friendInfo.location = new Location();
+                friendInfo.location.city = lc.data[0].current_location.city == null ? null : lc.data[0].current_location.city.Value;
+                friendInfo.location.country = lc.data[0].current_location.country == null ? null : lc.data[0].current_location.country.Value;
+                friendInfo.location.latitude = lc.data[0].current_location.latitude == null ? 0 : (decimal)(lc.data[0].current_location.latitude.Value);
+                friendInfo.location.longitude = lc.data[0].current_location.longitude == null ? 0 : (decimal)(lc.data[0].current_location.longitude.Value);
+                friendInfo.location.state = lc.data[0].current_location.state == null ? null : lc.data[0].current_location.state.Value;
+                friendInfo.location.street = lc.data[0].current_location.street == null ? null : lc.data[0].current_location.street.Value;
+                friendInfo.location.zip = lc.data[0].current_location.zip == null ? null : lc.data[0].current_location.zip.Value;
             }
 
             return friendInfo;

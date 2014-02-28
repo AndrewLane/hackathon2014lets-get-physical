@@ -7,5 +7,7 @@ namespace Hackathon.Models
         public string message;
         public DateTime? message_datetime;
         public string message_id;
+        public Location location;
+        public string birthday;
     }
 }
