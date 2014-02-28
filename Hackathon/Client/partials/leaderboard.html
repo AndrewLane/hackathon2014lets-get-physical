@@ -24,9 +24,8 @@
         <!--/.nav-collapse -->
     </div>
 </div>
-<div class="container">
-    <span class="label label-primary">{{friendInfoCards.PhysicalInteractionScore}}</span>
-    <span class="label label-danger">{{friendInfoCards.VirtualInteractionScore}}</span>
+<div ngShow="friendInfoCards" class="container">
+<span class="label label-primary">{{friendInfoCards.TotalInteractionScore}}</span>
     <h3 style="display:inline-flex;">
         {{friendInfoCards.FullName}}
     </h3>
@@ -35,6 +34,22 @@
     </div>
     <div class="center">
         <img src="{{friendInfoCards.ProfilePictureImagePath}}" style="padding-bottom:10px;">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>
+              Physical
+            </td>
+            <td>
+              Digital
+            </td>
+          </tr>
+          <tr>
+            <td><span class="label label-success">{{friendInfoCards.PhysicalInteractionScore}}</span></td>
+            <td></td> <span class="label label-danger">{{friendInfoCards.VirtualInteractionScore}}</span></td>
+          </tr>
+        </tbody>
+      </table>
         <a href="#" class="btn btn-success">Send Message</a> <br>
         <span class="muted">You were last in touch with {{friendInfoCards.FullName}} 3 days ago</span>
     </div>
