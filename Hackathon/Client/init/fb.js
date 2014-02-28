@@ -1,7 +1,7 @@
 "use strict";
 (function () {
-  angular.module("hackathon").factory("FacebookAuth", ["Login", "$q", "$state", FacebookAuth]);
-  function FacebookAuth(Login, $q, $state) {
+  angular.module("hackathon").factory("FacebookAuth", ["Login", "$q", "$state", "$rootScope", FacebookAuth]);
+  function FacebookAuth(Login, $q, $state, $rootScope) {
     var authQ = $q.defer();
 
     window.fbAsyncInit = function () {
@@ -16,14 +16,18 @@
         if (response.status === 'connected') {
           testAPI();
         } else if (response.status === 'not_authorized') {
-          authQ.reject("Not authorized");
+          $rootScope.$apply(function () {
+            authQ.reject("Not authorized");
+          });
           authQ = $q.defer();
           $state.transitionTo("/home");
           FB.login(function (response) {
             // handle the response
           });
         } else {
-          authQ.reject("Not authorized");
+          $rootScope.$apply(function () {
+            authQ.reject("Not authorized");
+          });
           authQ = $q.defer();
           FB.login(function (response) {
             // handle the response
@@ -50,7 +54,9 @@
           var uid = response.authResponse.userID;
           var accessToken = response.authResponse.accessToken;
           FacebookLogin().SetAuth(uid, accessToken);
-          authQ.resolve("Authorized!");
+          $rootScope.$apply(function () {
+            authQ.resolve("Authorized!");
+          });
           console.log('uid: ' + uid);
           console.log('accessToken: ' + accessToken);
         } else if (response.status === 'not_authorized') {
@@ -62,6 +68,12 @@
       });
     }
     return {
+      login: function() {
+        // for matt
+      },
+      logout: function () {
+        // for matt
+      },
       withAuth: function () {
         return authQ.promise;
       },
