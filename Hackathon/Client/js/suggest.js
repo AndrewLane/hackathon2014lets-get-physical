@@ -78,6 +78,7 @@ var ActivitySet =
       });
 
       function EventModal($scope, activity, $modalInstance) {
+        $scope.activity = activity;
         $scope.create = function () {
           $modalInstance.close();
         };
@@ -92,7 +93,7 @@ var ActivitySet =
           controller: EventModal,
           resolve: {
             activity: function () {
-              return $scope.activities[i];
+              return angular.copy($scope.activities[i]);
             }
           }
         });
