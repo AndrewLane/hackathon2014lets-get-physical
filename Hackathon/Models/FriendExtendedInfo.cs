@@ -1,4 +1,6 @@
-﻿namespace Hackathon.Models
+﻿using System;
+
+namespace Hackathon.Models
 {
     public class FriendExtendedInfo
     {
