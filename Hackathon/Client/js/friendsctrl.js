@@ -14,7 +14,7 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
       $http.get('/api/friends/' + fInd).then(function (response) {
         $scope.friendInfoCards = response.data;
       }, function () {
-        $state.transitionTo("/leaderboard", { index: 1 });
+        $state.transitionTo("leaderboard", { index: 1 });
       });
     }
   });
