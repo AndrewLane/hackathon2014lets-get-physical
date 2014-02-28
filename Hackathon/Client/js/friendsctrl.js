@@ -17,12 +17,14 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
         $state.transitionTo("leaderboard", { index: 1 });
       });
     }
+    function friendID() {
+        return $scope.friendInfoCards.FriendID;
+    }
     $scope.sendMessage = function() {
-      var friendID = function() {return $scope.friendInfoCards.FriendID;}();
       FB.ui({
           method:'send',
           link:'http://google.com/',
-          to:friendID
+          to:friendID()
       });
 
     }
