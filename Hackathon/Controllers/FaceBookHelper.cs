@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Hackathon.CacheHelper;
 using Newtonsoft.Json;
 using System.Text;
 using System.Net;
@@ -89,15 +90,21 @@ namespace Hackathon.Controllers
 
         public List<T> ExecuteApiCall<T>(string url)
         {
-            var webClient = new WebClient();
+            var cacheKey = url;
+            return HttpContext.Current.Cache.GetOrAdd(cacheKey, () =>
+            {
+                var webClient = new WebClient();
 
-            var response = webClient.DownloadData(url);
+                var response = webClient.DownloadData(url);
 
-            var anonymousTypeToReturn = new { data = new List<T>() };
+                var anonymousTypeToReturn = new {data = new List<T>()};
 
-            var resultOfConversion = JsonConvert.DeserializeAnonymousType(System.Text.Encoding.Default.GetString(response), anonymousTypeToReturn);
+                var resultOfConversion =
+                    JsonConvert.DeserializeAnonymousType(System.Text.Encoding.Default.GetString(response),
+                        anonymousTypeToReturn);
 
-            return resultOfConversion.data;
+                return resultOfConversion.data;
+            });
 
         }
 
