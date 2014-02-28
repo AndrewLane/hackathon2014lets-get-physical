@@ -59,8 +59,9 @@
         <a class="btn btn-default" ng-click="suggestActivity()"><img src="/Images/lgp_small.png"></img>Get Physical</a>
         <a class="btn btn-success" ng-click="sendMessage()">Send Message</a> <br>
 
-        <span ng-show="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}} <span am-time-ago="friendInfoCards.LastInteractionTime"></span></span>
-        <span ng-hide="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}}</span> <span class="label label-timedanger">Ages Ago!</span>
+        <span ng-show="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}} 
+        <span am-time-ago="friendInfoCards.LastInteractionTime" class="label label-timedanger"></span></span>
+        <span ng-hide="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}} <span class="label label-timedanger">Ages Ago!</span></span>
     </div>
    
     <hr>
