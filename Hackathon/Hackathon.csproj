@@ -191,6 +191,7 @@
     <Content Include="Global.asax" />
     <Content Include="Images\ajax_load.gif" />
     <Content Include="Images\lgp.png" />
+    <Content Include="Images\lgp_medium.png" />
     <Content Include="Images\lgp_mini.png" />
     <Content Include="Images\lgp_small.png" />
     <Content Include="Images\liked_button.jpg" />

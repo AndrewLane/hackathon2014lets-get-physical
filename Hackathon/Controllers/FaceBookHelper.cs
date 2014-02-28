@@ -13,7 +13,7 @@ namespace Hackathon.Controllers
 {
     public class FaceBookHelper
     {
-        public const int c_BackNumberOfDays = -30;
+        public const int c_BackNumberOfDays = -45;
 
         private string _id;
         private string _authToken;
@@ -22,6 +22,12 @@ namespace Hackathon.Controllers
         public class FriendPhoto
         {
             public string owner;
+        }
+
+        public class PrivateMessageResult
+        {
+            public string author_id;
+            public int created_time;
         }
 
         public FaceBookHelper(string AuthToken, string Id)
@@ -199,11 +205,27 @@ namespace Hackathon.Controllers
                 }
             }
 
+            var privateMessegers = GetFriendsWhoHavePrivateMessagedMe();
+            foreach(var prvMessager in privateMessegers)
+            {
+                if(_tempRankData.ContainsKey(prvMessager.author_id ))
+                {
+                    _tempRankData[prvMessager.author_id].totalVirtualRank += 79;
+                    if (_tempRankData[prvMessager.author_id].lastDateTime < prvMessager.created_time)
+                        _tempRankData[prvMessager.author_id].lastDateTime = prvMessager.created_time;
+                }
+            }
+
             var rankedFriends = friends.ConvertAll((x) => new RankedFriend(x, _tempRankData[x.uid].totalVirtualRank , _tempRankData[x.uid].totalPhysicalRank,  UnixTimeStampToDateTime(_tempRankData[x.uid].lastDateTime)));
 
             return rankedFriends;
         }
-        
+
+        private List<PrivateMessageResult> GetFriendsWhoHavePrivateMessagedMe()
+        {
+            return ExecuteFQL<PrivateMessageResult>("SELECT author_id, created_time FROM message WHERE thread_id in (  SELECT thread_id FROM thread where folder_id = 0) AND author_id <> me() AND created_time > " + GetUnixTime(DateTime.Today.AddDays(c_BackNumberOfDays)).ToString());
+        }
+       
         public FriendExtendedInfo GetFriendExtendedInfo(string uid)
         {
             var friendInfo = new FriendExtendedInfo();
