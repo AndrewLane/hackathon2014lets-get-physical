@@ -2,7 +2,11 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
   FacebookAuth.withAuth().then(function () {
     var fInd = $stateParams.index || '';
     $scope.index = parseInt(fInd);
-    $scope.alreadyliked = false;
+    $scope.alreadyliked_bool = false;
+
+    $scope.alreadyliked = function() {
+        return $scope.alreadyliked_bool
+    }
 
     if ((fInd === '') || (fInd === 0)) {
       // get all
@@ -27,7 +31,7 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
                           aliked_tmp = true;
                       }
                   }
-                  $scope.alreadyliked = aliked_tmp;
+                  $scope.alreadyliked_bool = aliked_tmp;
               });
           });
         });
@@ -62,7 +66,7 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
     $scope.like = function() {
       var statusId = $scope.userExtraInfo.LastStatusId;
       FB.api('/' + statusId + '/likes','post',function(response) {});
-      $scope.alreadyliked = true;
+      $scope.alreadyliked_bool = true;
     }
 
   });
