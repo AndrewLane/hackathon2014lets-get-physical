@@ -133,7 +133,7 @@ namespace Hackathon.Controllers
 
         public List<Friend> GetFriends()
         {
-            var friends = ExecuteFQL<Friend>("SELECT uid, name, pic_small FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) ");
+            var friends = ExecuteFQL<Friend>("SELECT uid, name, pic_big FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) ");
 
             //foreach(var friend in friends)
             //{
