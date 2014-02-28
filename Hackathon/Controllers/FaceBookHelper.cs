@@ -19,6 +19,11 @@ namespace Hackathon.Controllers
         private string _authToken;
         private Dictionary<string, RunningTotals> _tempRankData;
 
+        public class FriendPhoto
+        {
+            public string owner;
+        }
+
         public FaceBookHelper(string AuthToken, string Id)
         {
             _id = Id;
@@ -26,6 +31,8 @@ namespace Hackathon.Controllers
             _tempRankData = new Dictionary<string, RunningTotals>();
         }
 
+        #region Internal Methods
+       
         protected List<T> ExecuteApiCall<T>(string url)
         {
             var cacheKey = url;
@@ -66,25 +73,25 @@ namespace Hackathon.Controllers
             return ExecuteApiCall<T>(string.Format("https://graph.facebook.com/fql?q={0}&access_token={1}", fql, _authToken));
         }
 
-        private List<FriendPhoto> GetFriendPhotosImTaggedIn()
+        protected List<FriendPhoto> GetFriendPhotosImTaggedIn()
         {
             return ExecuteFQL<FriendPhoto>("SELECT owner FROM photo WHERE owner in (select uid2 from friend where uid1 = me())  AND object_id IN (SELECT object_id FROM photo_tag WHERE subject=me() AND created > " + GetUnixTime(DateTime.Today.AddDays(c_BackNumberOfDays)).ToString() + " )");
         }
 
-        private List<CheckinResult> GetFriendsWhoTaggedMeInCheckins()
+        protected List<CheckinResult> GetFriendsWhoTaggedMeInCheckins()
         {
             string fql = string.Format("SELECT author_uid FROM checkin WHERE author_uid in (select uid2 from friend where uid1 = me()) AND timestamp > {0}  AND me() IN tagged_uids", GetUnixTime(DateTime.Today.AddDays(c_BackNumberOfDays)).ToString());
 
             return ExecuteFQL<CheckinResult>(fql);
         }
 
-        private List<CommentResult> GetFriendsWhoHaveCommented()
+        protected List<CommentResult> GetFriendsWhoHaveCommented()
         {
             string fql = string.Format("select fromid, time from comment where post_id in (select post_id from stream where source_id = me()) AND time > {0}", GetUnixTime(DateTime.Today.AddDays(c_BackNumberOfDays)).ToString());
             return ExecuteFQL<CommentResult>(fql);
         }
 
-        private List<CheckIn> GetCheckins()
+        protected List<CheckIn> GetCheckins()
         {
             var webClient = new WebClient();
 
@@ -107,11 +114,8 @@ namespace Hackathon.Controllers
             return totalCheckIns;
 
         }
-        
-        private class FriendPhoto
-        {
-            public string owner;
-        }
+
+        #endregion
 
         #region "Public Methods"
 
@@ -133,7 +137,7 @@ namespace Hackathon.Controllers
             {
                 if (_tempRankData.ContainsKey(photoFriend.owner))
                 {
-                    _tempRankData[photoFriend.owner].totalPhysicalRank += 1;
+                    _tempRankData[photoFriend.owner].totalPhysicalRank += 53;
                     
                 }
             }
@@ -147,7 +151,7 @@ namespace Hackathon.Controllers
                     foreach (var friendLike in stat.likes.data)
                     {
                         if (_tempRankData.ContainsKey(friendLike.id))
-                            _tempRankData[friendLike.id].totalVirtualRank  += 1;
+                            _tempRankData[friendLike.id].totalVirtualRank  += 32;
                     }
                 }
 
@@ -157,7 +161,7 @@ namespace Hackathon.Controllers
             foreach (var ci in checkIns)
             {
                 if (_tempRankData.ContainsKey(ci.author_uid))
-                    _tempRankData[ci.author_uid].totalPhysicalRank  += 1;
+                    _tempRankData[ci.author_uid].totalPhysicalRank  += 28;
 
             }
 
@@ -167,7 +171,7 @@ namespace Hackathon.Controllers
             {
                 if (_tempRankData.ContainsKey(commenter.fromid))
                 {
-                    _tempRankData[commenter.fromid].totalVirtualRank += 2;
+                    _tempRankData[commenter.fromid].totalVirtualRank += 28;
                     if(_tempRankData[commenter.fromid].lastDateTime < commenter.time )
                         _tempRankData[commenter.fromid].lastDateTime =  commenter.time;
                 }
@@ -182,12 +186,13 @@ namespace Hackathon.Controllers
         {
             var friendInfo = new FriendExtendedInfo();
 
-            LastMessage lm = ExecuteFQL<LastMessage>("SELECT uid, message, time FROM status WHERE uid = " + uid + " ORDER BY time DESC LIMIT 1").FirstOrDefault();
+            LastMessage lm = ExecuteFQL<LastMessage>("SELECT status_id, uid, message, time FROM status WHERE uid = " + uid + " ORDER BY time DESC LIMIT 1").FirstOrDefault();
 
             if (lm != null)
             {
                 friendInfo.message = lm.message;
                 friendInfo.message_datetime = UnixTimeStampToDateTime(lm.time);
+                friendInfo.message_id = lm.status_id;
             }
 
             return friendInfo;

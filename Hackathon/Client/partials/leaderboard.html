@@ -5,7 +5,7 @@
     <span class="label label-primary"># {{friendInfoCards.FriendRank}}</span>
     <h3 style="display:inline-flex;">
         {{friendInfoCards.FullName}}
-    </h3>
+    </h3> is
     <div>
         {{userExtraInfo.LastStatusUpdate}}
         <a class="btn btn-primary" ng-click="like()">Logout</a>
@@ -37,10 +37,11 @@
             </tbody>
         </table>
 
-        <a class="btn btn-success" ng-click="suggestActivity()">Suggest Activity</a>
+        <a class="btn btn-default" ng-click="suggestActivity()"><img src="/Images/lgp_mini.png"></img>Get Physical</a>
         <a class="btn btn-success" ng-click="sendMessage()">Send Message</a> <br>
 
-        <span class="muted">You were last in touch with {{friendInfoCards.FullName}} {{friendInfoCards.LastInteractionTime}}</span>
+        <span ng-show="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}} {{friendInfoCards.LastInteractionTime}}</span>
+        <span ng-hide="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}}</span> <span class="label label-danger">Ages Ago!</span>
     </div>
     <hr>
     <div class="center">

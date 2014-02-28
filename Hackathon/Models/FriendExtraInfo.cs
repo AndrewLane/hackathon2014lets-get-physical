@@ -16,5 +16,10 @@ namespace Hackathon.Models
         /// If applicable, the time of the last status update
         /// </summary>
         public DateTime? LastStatusUpdateDateTime { get; set; }
+
+        /// <summary>
+        /// The ID of the last status update
+        /// </summary>
+        public string LastStatusId { get; set; }
     }
 }
