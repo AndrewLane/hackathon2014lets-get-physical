@@ -175,6 +175,7 @@
     <Content Include="Client\js\suggest.js" />
     <Content Include="Client\js\test.js" />
     <Content Include="Client\js\userInfoCache.js" />
+    <Content Include="Client\partials\create_event_modal.html" />
     <Content Include="Client\partials\friend.html" />
     <Content Include="Client\partials\hangout_static.html" />
     <Content Include="Client\partials\home.html" />
