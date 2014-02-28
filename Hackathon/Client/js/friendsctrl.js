@@ -17,6 +17,15 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
         $state.transitionTo("leaderboard", { index: 1 });
       });
     }
+    $scope.sendMessage = function() {
+      FB.ui({
+          method:'send',
+          link:'http://google.com',
+          to:$scope.friendInfoCards.FriendID
+      });
+
+    }
+
   });
 });
 
