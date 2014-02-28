@@ -49,3 +49,8 @@ text-align:center;
     color:#bbb;
     font-size:11px;
 }
+
+.icon-animate {
+    webkit-animation: spin 2s infinite linear;
+    font-size:20px;
+}
