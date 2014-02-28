@@ -1,6 +1,14 @@
 ﻿    <div class="center" ng-hide="friendInfoCards">
         <i class="fa fa-spinner fa-5x fa-spin"></i>
     </div>
+    <div class="center" ng-hide="friendInfoCards">
+        <ul class="pagination">
+            <li>
+                <button class="btn btn-link" ui-sref="leaderboard({ index: index - 1 })" ng-class="{disabled: index <= 1}">Prev</button>
+                <button class="btn btn-link" ui-sref="leaderboard({ index: index + 1 })">Next</button>
+            </li>
+        </ul>
+    </div>
     <div ng-show="friendInfoCards" class="container">
     <span class="label label-primary"># {{friendInfoCards.FriendRank}}</span>
     <h3 style="display:inline-flex;">
@@ -49,14 +57,7 @@
         <span ng-hide="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}}</span> <span class="label label-timedanger">Ages Ago!</span>
     </div>
     <hr>
-    <div class="center">
-        <ul class="pagination">
-            <li>
-                <button class="btn btn-link" ui-sref="leaderboard({ index: index - 1 })" ng-class="{disabled: index <= 1}">Prev</button>
-                <button class="btn btn-link" ui-sref="leaderboard({ index: index + 1 })">Next</button>
-            </li>
-        </ul>
-    </div>
+    
     <a class="btn btn-link btn-small" ng-click="logout();" href="#">Logout</a>
 
 </div>
