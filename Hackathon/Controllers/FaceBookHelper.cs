@@ -8,7 +8,7 @@ using System.Text;
 using System.Net;
 
 
-namespace Hackathon.Controllers
+namespace MvcApplication1.Controllers
 {
     public class FaceBookHelper
     {
@@ -16,8 +16,14 @@ namespace Hackathon.Controllers
         
         public class Friend
         {
-            public string id;
+            public string uid;
             public string name;
+            public string pic_small;
+        }
+
+        public class FriendExtendedInfo
+        {
+            public string message;
         }
 
         public class CheckIn
@@ -48,6 +54,11 @@ namespace Hackathon.Controllers
             public decimal longitude;
         }
 
+        public class LastMessage
+        {
+            public string uid;
+            public string message;
+        }
         
         public class RankedFriend : Friend
         {
@@ -56,8 +67,9 @@ namespace Hackathon.Controllers
 
             public RankedFriend(Friend friend, int VirtualRank, int PhysicalRank)
             {
-                id = friend.id;
+                uid = friend.uid;
                 name = friend.name;
+                pic_small = friend.pic_small;
                 physicalRank = PhysicalRank;
                 virtualRank = VirtualRank;
             }
@@ -70,9 +82,20 @@ namespace Hackathon.Controllers
             public LikeData likes;
         }
 
+        public class LikeFriend
+        {
+            public string id;
+            public string name;
+        }
+
         public class LikeData
         {
-            public List<Friend> data;
+            public List<LikeFriend> data;
+        }
+
+        public class CheckinResult
+        {
+            public string author_uid;
         }
 
         private string _id;
@@ -110,7 +133,16 @@ namespace Hackathon.Controllers
 
         public List<Friend> GetFriends()
         {
-            return ExecuteApiCall<Friend>(string.Format("https://graph.facebook.com/{1}/friends?access_token={0}", _authToken, _id));
+            var friends = ExecuteFQL<Friend>("SELECT uid, name, pic_small FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) ");
+
+            //foreach(var friend in friends)
+            //{
+            //    LastMessage lm = ExecuteFQL<LastMessage>("SELECT uid, message FROM status WHERE uid = " + friend.uid + " ORDER BY time DESC LIMIT 1").FirstOrDefault();
+            //    if (lm != null)
+            //        friend.message = lm.message;
+            //}
+
+            return friends;
         }
 
 
@@ -119,7 +151,7 @@ namespace Hackathon.Controllers
             return ExecuteApiCall<Status>(string.Format("https://graph.facebook.com/{0}/statuses?fields=id,likes&until=1384899552&access_token={1}", _id, _authToken));
         }
 
-        private List<T> ExecutelFQL<T>(string FQL)
+        private List<T> ExecuteFQL<T>(string FQL)
         {
             string fql = System.Web.HttpUtility.UrlEncode(FQL);
 
@@ -129,7 +161,14 @@ namespace Hackathon.Controllers
 
         private List<FriendPhoto> GetFriendPhotosImTaggedIn()
         {
-            return ExecutelFQL<FriendPhoto>("SELECT owner FROM photo WHERE owner in (select uid2 from friend where uid1 = me())  AND object_id IN (SELECT object_id FROM photo_tag WHERE subject=me() AND created > " + GetUnixTime(DateTime.Today.AddDays(-160)).ToString() + " )");
+            return ExecuteFQL<FriendPhoto>("SELECT owner FROM photo WHERE owner in (select uid2 from friend where uid1 = me())  AND object_id IN (SELECT object_id FROM photo_tag WHERE subject=me() AND created > " + GetUnixTime(DateTime.Today.AddDays(-160)).ToString() + " )");
+        }
+
+        private List<CheckinResult> GetFriendsWhoTaggedMeInCheckins()
+        {
+            string fql = string.Format("SELECT author_uid FROM checkin WHERE author_uid in (select uid2 from friend where uid1 = me()) AND timestamp > {0}  AND me() IN tagged_uids", GetUnixTime(DateTime.Today.AddDays(-160)).ToString());
+
+            return ExecuteFQL<CheckinResult>(fql);
         }
 
         private class FriendPhoto
@@ -143,8 +182,8 @@ namespace Hackathon.Controllers
 
             foreach(var friend in friends)
             {
-                _tempFriendVirtualRankData[friend.id] = 0;
-                _tempFriendPhysicalRankData[friend.id] = 0;
+                _tempFriendVirtualRankData[friend.uid] = 0;
+                _tempFriendPhysicalRankData[friend.uid] = 0;
             }
 
             var photoFriends = GetFriendPhotosImTaggedIn();
@@ -169,7 +208,15 @@ namespace Hackathon.Controllers
                
             }
 
-            var rankedFriends = friends.ConvertAll((x) => new RankedFriend(x, _tempFriendVirtualRankData[x.id], _tempFriendPhysicalRankData[x.id]));
+            var checkIns = GetFriendsWhoTaggedMeInCheckins();
+            foreach(var ci in checkIns)
+            {
+                if (_tempFriendPhysicalRankData.ContainsKey(ci.author_uid))
+                    _tempFriendPhysicalRankData[ci.author_uid] += 1;
+
+            }
+
+            var rankedFriends = friends.ConvertAll((x) => new RankedFriend(x, _tempFriendVirtualRankData[x.uid], _tempFriendPhysicalRankData[x.uid]));
             
             return rankedFriends;
         }
@@ -187,7 +234,7 @@ namespace Hackathon.Controllers
 
             foreach(Friend friend in friends)
             {
-                string url = string.Format("https://graph.facebook.com/{0}/checkins?since={1}&access_token={2}&fields=created_time,id,from,place", friend.id, GetUnixTime(DateTime.Today.AddDays(-160)).ToString(), _authToken);
+                string url = string.Format("https://graph.facebook.com/{0}/checkins?since={1}&access_token={2}&fields=created_time,id,from,place", friend.uid, GetUnixTime(DateTime.Today.AddDays(-160)).ToString(), _authToken);
 
                 var friendCheckIns = ExecuteApiCall<CheckIn>(url);
 
