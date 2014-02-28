@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Client\full\presentation.html" />
     <Content Include="Client\init\app.js" />
     <Content Include="Client\init\fb.js" />
     <Content Include="Client\js\root.js" />
@@ -166,6 +167,7 @@
     <Content Include="Client\partials\logintest.html" />
     <Content Include="Client\partials\test.html" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\impress.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
