@@ -8,8 +8,8 @@ namespace Hackathon.Controllers
         public FriendExtraInfo Get(string id)
         {
             var fbHelper = new FaceBookHelper(AuthToken, UserId);
-            var friend = fbHelper.GetFriend(id);
-            return friend != null ? new FriendExtraInfo {LastStatusUpdate = "last status update goes here"} : null;
+            var friend = fbHelper.GetFriendExtendedInfo(id);
+            return friend != null ? new FriendExtraInfo {LastStatusUpdate = friend.message} : null;
         }
     }
 }
