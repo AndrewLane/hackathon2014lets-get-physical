@@ -18,10 +18,11 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
       });
     }
     $scope.sendMessage = function() {
+      var friendID = $scope.friendInfoCards.FriendID;
       FB.ui({
           method:'send',
-          link:'http://hackathonletsgetphysical.apphb.com/',
-          to:$scope.friendInfoCards.FriendID
+          link:'http://google.com/',
+          to:friendID
       });
 
     }
