@@ -1,24 +1,26 @@
-angular.module( 'hackathon').controller( 'GetInfoCards', function ( $scope, $http, $stateParams )
+angular.module( 'hackathon').controller( 'GetInfoCards', function ( $scope, $http, $stateParams, FacebookAuth )
 {
-	var fInd = $stateParams.index || '';
+  FacebookAuth.withAuth().then(function () {
+    var fInd = $stateParams.index || '';
 	
-	if ((fInd === '') || (fInd === 0))
-	{
-		// get all
-		$http.get( '/api/friends/' ).success( function ( data )
-		{
-			$scope.friendInfoCards = data;
-		} );
-	}
-	else
-	{
-		// get specific
-		$http.get( '/api/friends/' + fInd ).success( function ( data )
-		{
-			$scope.friendInfoCards = data;
-		} );
+    if ((fInd === '') || (fInd === 0))
+    {
+      // get all
+      $http.get( '/api/friends/' ).success( function ( data )
+      {
+        $scope.friendInfoCards = data;
+      } );
+    }
+    else
+    {
+      // get specific
+      $http.get( '/api/friends/' + fInd ).success( function ( data )
+      {
+        $scope.friendInfoCards = data;
+      } );
 	
-	}
+    }
+  });
 });
 
 angular.module('hackathon').controller('NotifyFriend', function ($scope, $http, $stateParams) 

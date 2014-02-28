@@ -9,7 +9,8 @@
 
     $stateProvider.state('home', {
       url: '/home',
-      templateUrl: '/Client/partials/home.html'
+      templateUrl: '/Client/partials/home.html',
+      controller: 'Home'
     });
 
     $stateProvider.state('test', {

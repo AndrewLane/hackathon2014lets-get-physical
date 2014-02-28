@@ -23,6 +23,8 @@
             // handle the response
           });
         } else {
+          authQ.reject("Not authorized");
+          authQ = $q.defer();
           FB.login(function (response) {
             // handle the response
           });
