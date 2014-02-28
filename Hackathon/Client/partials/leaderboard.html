@@ -10,6 +10,8 @@
             </li>
         </ul>
     </div>
+    <h4>Start becoming a better friend</h4>
+    <span class="label label-primary pull-right">{{ getActionCount() }} Improvements</span>
     <div ng-show="friendInfoCards" class="well">
     <span class="label label-primary"># {{friendInfoCards.FriendRank}}</span>
     <h4 style="display:inline-flex;">
@@ -56,15 +58,13 @@
             </tbody>
         </table>
 
-        <a class="btn btn-default" ng-click="suggestActivity()"><img src="/Images/lgp_small.png"></img>Get Physical</a>
+        <a class="btn btn-default" ng-click="suggestActivity()"><img src="/Images/lgp_small.png" style="height:20px; width:20px;"></img>Get Physical</a>
         <a class="btn btn-success" ng-click="sendMessage()">Send Message</a> <br>
 
         <span ng-show="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}} 
         <span am-time-ago="friendInfoCards.LastInteractionTime" class="label label-timedanger"></span></span>
         <span ng-hide="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}} <span class="label label-timedanger">Ages Ago!</span></span>
-        <div>
-            <span class="label label-primary">{{ getActionCount() }} actions</span>
-        </div>
+        
     </div>
    
     <hr>
