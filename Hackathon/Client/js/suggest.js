@@ -3,7 +3,7 @@
 var ActivitySet =
   [
     {
-      type: "Theatre",
+      type: "Musical",
       schedule: "Opens March 23 2014",
       info: "Watch Les Misérables on Broadway",
       actionCaption: "Buy tickets"
@@ -22,13 +22,13 @@ var ActivitySet =
       actionDisabled: true
     },
     {
-      type: "Sports",
+      type: "Boxing",
       schedule: "May 27th, 2018",
       info: "Pacquiao vs Mayweather - Grudge Match",
       actionCaption: "Order PPV"
     },
     {
-      type: "Sports",
+      type: "World Cup Soccer",
       schedule: "June 12 to July 13",
       info: "2014 FIFA World Cup - Brazil",
       actionCaption: "Trip Planner"
@@ -46,9 +46,6 @@ var ActivitySet =
       actionCaption: "Find Theater Near You"
     }
   ];
-
-
-
 
 (function () {
   angular.module('hackathon').controller('Suggest', ['$scope', '$http', '$timeout', '$stateParams', 'FacebookAuth', 'UserInfoCache', '$modal', Suggest]);
