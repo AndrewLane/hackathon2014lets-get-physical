@@ -25,6 +25,12 @@
       controller: 'GetInfoCards'
     });
 
+    $stateProvider.state('suggest', {
+      url: '/suggest/:index',
+      templateUrl: '/Client/partials/suggest.html',
+      controller: 'Suggest'
+    });
+
     $stateProvider.state('friend', {
       url: '/friend/:index',
       templateUrl: '/Client/partials/friend.html',

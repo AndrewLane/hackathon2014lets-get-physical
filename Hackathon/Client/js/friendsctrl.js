@@ -1,4 +1,4 @@
-angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, $stateParams, FacebookAuth) {
+angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, $state, $stateParams, FacebookAuth, UserInfoCache) {
   FacebookAuth.withAuth().then(function () {
     var fInd = $stateParams.index || '';
     $scope.index = parseInt(fInd);
@@ -13,6 +13,7 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
       // get specific
       $http.get('/api/friends/' + fInd).then(function (response) {
         $scope.friendInfoCards = response.data;
+        UserInfoCache.put(response.data.FriendId, response.data);
       }, function () {
         $state.transitionTo("leaderboard", { index: 1 });
       });
@@ -20,14 +21,17 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
     function friendID() {
         return $scope.friendInfoCards.FriendId;
     }
-    $scope.sendMessage = function() {
+    $scope.sendMessage = function () {
       FB.ui({
-          method:'send',
-          link:'http://hackathonletsgetphysical.apphb.com/Client/partials/send_message_static.html',
-          to:friendID()
-      });
+        method: 'send',
+        link: 'http://hackathonletsgetphysical.apphb.com/Client/partials/send_message_static.html',
+        to: friendID()
+      })
+    };
 
-    }
+    $scope.suggestActivity = function () {
+      $state.transitionTo("suggest", { index: $scope.friendInfoCards.FriendId });
+    };
 
   });
 });
