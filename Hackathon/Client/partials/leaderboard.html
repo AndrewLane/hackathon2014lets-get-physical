@@ -15,16 +15,20 @@
     <h4 style="display:inline-flex;">
         {{friendInfoCards.FullName}}
     </h4> is
-    <div ng-hide="userExtraInfo.LastStatusUpdate">
+    <div ng-hide="userExtraInfo">
     <i class="fa fa-spinner fa-spin"></i>
     </div>
-    <div ng-show"userExtraInfo.LastStatusUpdate">
+ 
+    <div ng-show="userExtraInfo.LastStatusUpdate">
         {{userExtraInfo.LastStatusUpdate}}
         <a ng-show="!alreadyliked()" ng-click="like()" class="btn btn-link btn-mini">
         <i class="fa fa-thumbs-up"></i>Like</a>
         <a ng-show="alreadyliked()" class ="btn btn-mini btn-link disabled">Liked</a>
-
     </div>
+    
+    <div ng-show="userExtraInfo && !userExtraInfo.LastStatusUpdate">
+    <span>is MIA on facebook!</span> <a class="btn btn-link btn-mini" ng-click="sendMessage()">Say hello!</a>
+    
     <div class="center">
         <img src="{{friendInfoCards.ProfilePictureImagePath}}" style="padding-bottom:10px;">
         <table class="table">
