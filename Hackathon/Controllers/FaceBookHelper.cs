@@ -103,7 +103,7 @@ namespace Hackathon.Controllers
 
         public List<Friend> GetFriends()
         {
-            return ExecuteApiCall<Friend>(string.Format("https://graph.facebook.com/1207352884/friends?access_token={0}", _authToken));
+            return ExecuteApiCall<Friend>(string.Format("https://graph.facebook.com/{1}/friends?access_token={0}", _authToken, _id));
         }
 
 
