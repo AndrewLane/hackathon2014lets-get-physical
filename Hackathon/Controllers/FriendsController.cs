@@ -25,7 +25,7 @@ namespace Hackathon.Controllers
             var fbHelper = new FaceBookHelper(AuthToken, UserId);
 
             var allFriends =
-                fbHelper.GetFriends().Select(friend => new FriendInfoCard { FriendId = friend.id, FullName = friend.name }).ToList();
+                fbHelper.GetRankedFriends().OrderByDescending(friend => friend.physicalRank + friend.virtualRank).Select(friend => new FriendInfoCard { FriendId = friend.id, FullName = friend.name }).ToList();
 
             if (allFriends.Any() == false)
             {
@@ -36,7 +36,7 @@ namespace Hackathon.Controllers
             {
                 id = allFriends.Count();
             }
-            if (id < allFriends.Count())
+            if (id < 1)
             {
                 id = 1;
             }
