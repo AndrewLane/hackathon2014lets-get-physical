@@ -21,5 +21,10 @@ namespace Hackathon.Models
         /// The ID of the last status update
         /// </summary>
         public string LastStatusId { get; set; }
+
+        /// <summary>
+        /// Days until this friend's next birthday
+        /// </summary>
+        public int? DaysUntilBirthday { get; set; }
     }
 }
