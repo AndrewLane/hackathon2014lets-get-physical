@@ -4854,6 +4854,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .label-success {
   background-color: #5cb85c;
+  font-size:16px;
 }
 
 .label-success[href]:hover,
