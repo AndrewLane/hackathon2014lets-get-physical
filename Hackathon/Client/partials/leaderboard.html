@@ -1,7 +1,7 @@
 ﻿    <div class="center" ng-hide="friendInfoCards">
         <i class="fa fa-spinner fa-5x fa-spin"></i>
     </div>
-    <div class="center" ng-hide="friendInfoCards">
+    <div class="center" ng-show="friendInfoCards">
         <ul class="pagination">
             <li>
                 <button class="btn btn-link" ui-sref="leaderboard({ index: index - 1 })" ng-class="{disabled: index <= 1}">Prev</button>
@@ -19,7 +19,7 @@
     </div>
     <div ng-show"userExtraInfo.LastStatusUpdate">
         {{userExtraInfo.LastStatusUpdate}}
-        <a ng-show="!alreadyliked()" ng-click="like()" style="cursor:pointer;"><img src="/Images/like_button.jpg"></a>
+        <a ng-show="!alreadyliked()" ng-click="like()"><img src="/Images/like_button.jpg"></a>
         <img ng-show="alreadyliked()" src="/Images/liked_button.jpg">
 
     </div>
@@ -53,7 +53,7 @@
         <a class="btn btn-default" ng-click="suggestActivity()"><img src="/Images/lgp_small.png"></img>Get Physical</a>
         <a class="btn btn-success" ng-click="sendMessage()">Send Message</a> <br>
 
-        <span ng-show="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}} {{friendInfoCards.LastInteractionTime}}</span>
+        <span ng-show="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}} <span am-time-ago="friendInfoCards.LastInteractionTime"></span></span>
         <span ng-hide="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}}</span> <span class="label label-timedanger">Ages Ago!</span>
     </div>
     <hr>
