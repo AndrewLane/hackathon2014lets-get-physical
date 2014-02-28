@@ -4502,7 +4502,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse {
-  background-color: #222222;
+  background-color: #eeeeee;
   border-color: #080808;
 }
 
@@ -4844,6 +4844,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .label-primary {
   background-color: #428bca;
+  font-size:16px;
 }
 
 .label-primary[href]:hover,
@@ -4880,6 +4881,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .label-danger {
   background-color: #d9534f;
+  font-size:16px;
 }
 
 .label-danger[href]:hover,
