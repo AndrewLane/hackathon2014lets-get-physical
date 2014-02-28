@@ -69,10 +69,10 @@
     }
     return {
       login: function() {
-        FB.login(function (response) {},{scope:"email,user_about_me,user_checkins,friends_checkins,friends_about_me,user_activities,friends_activities,user_birthday,friends_birthday,user_events,friends_events,user_groups,friends_groups,user_hometown,friends_hometown,user_likes,friends_likes,user_location,friends_location,user_notes,friends_notes,user_photos,friends_photos,user_relationships,friends_relationships,user_relationship_details,friends_relationship_details,user_status,friends_status,read_stream,read_friendlists,user_videos,friends_videos"});
+        FB.login(function (response) {$state.transitionTo("/leaderboard/1");},{scope:"email,user_about_me,user_checkins,friends_checkins,friends_about_me,user_activities,friends_activities,user_birthday,friends_birthday,user_events,friends_events,user_groups,friends_groups,user_hometown,friends_hometown,user_likes,friends_likes,user_location,friends_location,user_notes,friends_notes,user_photos,friends_photos,user_relationships,friends_relationships,user_relationship_details,friends_relationship_details,user_status,friends_status,read_stream,read_friendlists,user_videos,friends_videos"});
       },
       logout: function () {
-        FB.logout();
+        FB.logout(function() {$state.transitionTo("/home")});
       },
       withAuth: function () {
         return authQ.promise;
