@@ -45,6 +45,10 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
       $state.transitionTo("leaderboard", { index: $scope.index + 1 });
     }
 
+    $scope.like = function() {
+      var statusId = $scope.userExtraInfo.LastStatusId;
+      FB.api('/' + statusId + '/likes',{method:'post'});
+    }
 
   });
 });
