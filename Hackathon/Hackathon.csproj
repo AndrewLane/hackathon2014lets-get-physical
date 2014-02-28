@@ -193,6 +193,8 @@
     <Content Include="Images\lgp.png" />
     <Content Include="Images\lgp_mini.png" />
     <Content Include="Images\lgp_small.png" />
+    <Content Include="Images\liked_button.jpg" />
+    <Content Include="Images\like_button.jpg" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-cookies.js" />
