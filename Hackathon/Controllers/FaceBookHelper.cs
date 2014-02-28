@@ -69,7 +69,7 @@ namespace Hackathon.Controllers
             {
                 uid = friend.uid;
                 name = friend.name;
-                pic_small = friend.pic_small;
+                pic_big = friend.pic_big;
                 physicalRank = PhysicalRank;
                 virtualRank = VirtualRank;
             }

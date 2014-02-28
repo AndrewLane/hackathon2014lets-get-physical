@@ -35,7 +35,7 @@ namespace Hackathon.Controllers
                                 VirtualInteractionScore = friend.virtualRank,
                                 PhysicalInteractionScore = friend.physicalRank,
                                 LastSocialUpdateMetadata = "Loading...",
-                                ProfilePictureImagePath = friend.pic_small
+                                ProfilePictureImagePath = friend.pic_big
                             })
                     .OrderByDescending(friend => friend.TotalInteractionScore)
                     .ToList();
