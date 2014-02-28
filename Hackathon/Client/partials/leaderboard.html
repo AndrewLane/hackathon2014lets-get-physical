@@ -24,7 +24,7 @@
         <!--/.nav-collapse -->
     </div>
 </div>
-<div ngShow="friendInfoCards" class="container">
+<div ng-show="friendInfoCards" class="container">
 <span class="label label-primary">{{friendInfoCards.TotalInteractionScore}}</span>
     <h3 style="display:inline-flex;">
         {{friendInfoCards.FullName}}
@@ -46,7 +46,7 @@
           </tr>
           <tr>
             <td><span class="label label-success">{{friendInfoCards.PhysicalInteractionScore}}</span></td>
-            <td></td> <span class="label label-danger">{{friendInfoCards.VirtualInteractionScore}}</span></td>
+            <td><span class="label label-danger">{{friendInfoCards.VirtualInteractionScore}}</span></td>
           </tr>
         </tbody>
       </table>
