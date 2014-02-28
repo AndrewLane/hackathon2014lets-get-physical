@@ -35,6 +35,6 @@ angular.module('hackathon').controller('NotifyFriend', function ($scope, $http, 
 	{
 		$scope.notifyFriendSuccess = true;
 	} );
-	
+
 });
 
