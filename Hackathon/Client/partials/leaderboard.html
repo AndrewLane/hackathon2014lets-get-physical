@@ -55,6 +55,10 @@
 
         <span ng-show="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}} {{friendInfoCards.LastInteractionTime}}</span>
         <span ng-hide="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}}</span> <span class="label label-timedanger">Ages Ago!</span>
+
+        <div>
+            <span class="label label-primary">{{ getActionCount() }} actions</span>
+        </div>
     </div>
     <hr>
     
