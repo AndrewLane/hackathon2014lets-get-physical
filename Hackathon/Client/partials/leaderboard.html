@@ -1,7 +1,8 @@
+﻿   <div  ng-swipe-left="gotoNext()" ng-swipe-right="gotoPrevious()">
 ﻿    <div class="center" ng-hide="friendInfoCards">
         <i class="fa fa-spinner fa-5x fa-spin"></i>
     </div>
-    <div class="center" ng-hide="friendInfoCards">
+    <div class="center" ng-show="friendInfoCards">
         <ul class="pagination">
             <li>
                 <button class="btn btn-link" ui-sref="leaderboard({ index: index - 1 })" ng-class="{disabled: index <= 1}">Prev</button>
@@ -9,21 +10,26 @@
             </li>
         </ul>
     </div>
-    <div ng-show="friendInfoCards" class="jumbotron">
+    <div ng-show="friendInfoCards" class="well">
     <span class="label label-primary"># {{friendInfoCards.FriendRank}}</span>
     <h4 style="display:inline-flex;">
         {{friendInfoCards.FullName}}
     </h4> is
-    <div ng-hide="userExtraInfo.LastStatusUpdate">
+    <div ng-hide="userExtraInfo">
     <i class="fa fa-spinner fa-spin"></i>
     </div>
-    <div ng-show"userExtraInfo.LastStatusUpdate">
+ 
+    <div ng-show="userExtraInfo.LastStatusUpdate">
         {{userExtraInfo.LastStatusUpdate}}
-        <a ng-show="!alreadyliked()" ng-click="like()" style="cursor:pointer;"><img src="/Images/like_button.jpg"></a>
-        <img ng-show="alreadyliked()" src="/Images/liked_button.jpg">
-
+        <a ng-show="!alreadyliked()" ng-click="like()" class="btn btn-link btn-mini">
+        <i class="fa fa-thumbs-up"></i>Like</a>
+        <a ng-show="alreadyliked()" class ="btn btn-mini btn-link disabled">Liked</a>
     </div>
-    <div class="center" ng-swipe-left="gotoNext()" ng-swipe-right="gotoPrevious()">
+    
+    <div ng-show="userExtraInfo && !userExtraInfo.LastStatusUpdate">
+    <span>is MIA on facebook!</span> <a class="btn btn-link btn-mini" ng-click="sendMessage()">Say hello!</a>
+    
+    <div class="center">
         <img src="{{friendInfoCards.ProfilePictureImagePath}}" style="padding-bottom:10px;">
         <table class="table">
             <tbody>
@@ -53,16 +59,17 @@
         <a class="btn btn-default" ng-click="suggestActivity()"><img src="/Images/lgp_small.png"></img>Get Physical</a>
         <a class="btn btn-success" ng-click="sendMessage()">Send Message</a> <br>
 
-        <span ng-show="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}} {{friendInfoCards.LastInteractionTime}}</span>
-        <span ng-hide="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}}</span> <span class="label label-timedanger">Ages Ago!</span>
-
+        <span ng-show="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}} 
+        <span am-time-ago="friendInfoCards.LastInteractionTime" class="label label-timedanger"></span></span>
+        <span ng-hide="friendInfoCards.LastInteractionTime" class="muted">You were last in touch with {{friendInfoCards.FullName}} <span class="label label-timedanger">Ages Ago!</span></span>
         <div>
             <span class="label label-primary">{{ getActionCount() }} actions</span>
         </div>
     </div>
+   
     <hr>
     
     <a class="btn btn-link btn-small" ng-click="logout();" href="#">Logout</a>
 
-</div>
+</div> </div>
 
