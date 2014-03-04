@@ -29,9 +29,8 @@
                 <i class="fa fa-thumbs-up"></i>Like
             </a>
             <a ng-show="alreadyliked()" class="btn btn-mini btn-link disabled">Liked</a> 
-           <pre>{{parseInt(userExtraInfo.DaysUntilBirthday) < 7 ? 'yes':'no'}} </pre>
-            <pre>{{userExtraInfo.DaysUntilBirthday < 7 ? 'yes':'no'}} </pre>
-            <p ng-show="userExtraInfo.DaysUntilBirthday < 7">
+           
+            <p ng-show="userExtraInfo.DaysUntilBirthday < 40">
              <i class="fa fa-calendar"></i> 
                 Has a birthday coming up in {{userExtraInfo.DaysUntilBirthday}} days.  </p>
         </div>
