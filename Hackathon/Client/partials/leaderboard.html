@@ -29,9 +29,9 @@
                 <i class="fa fa-thumbs-up"></i>Like
             </a>
             <a ng-show="alreadyliked()" class="btn btn-mini btn-link disabled">Liked</a> 
-            <p ng-show="userExtraInfo.DaysUntilBirthday < "7" ">
+            <p ng-show="userExtraInfo.DaysUntilBirthday === '0' ">
                 <i class="fa fa-calendar"></i> 
-                {{friendInfoCards.FullName}} has a birthday in {{userExtraInfo.DaysUntilBirthday}} days. </p>
+                Today's {{friendInfoCards.FullName}}'s Birthday. Say Happy Birthday! </p>
         </div>
 
         <div ng-show="userExtraInfo && !userExtraInfo.LastStatusUpdate">
