@@ -30,7 +30,7 @@
                 <i class="fa fa-thumbs-up"></i>Like
             </a>
             <a ng-show="alreadyliked()" class="btn btn-mini btn-link disabled">Liked</a> 
-            <p ng-show= "userExtraInfo.DaysUntilBirthday <= 7">{{friendInfoCards.FullName}} has a birthday in {{userExtraInfo.DaysUntilBirthday}} days. </p>
+            <p ng-show= "userExtraInfo.DaysUntilBirthday < 7">{{friendInfoCards.FullName}} has a birthday in {{userExtraInfo.DaysUntilBirthday}} days. </p>
         </div>
 
         <div ng-show="userExtraInfo && !userExtraInfo.LastStatusUpdate">
