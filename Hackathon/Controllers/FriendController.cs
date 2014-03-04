@@ -42,7 +42,7 @@ namespace Hackathon.Controllers
                 return Convert.ToInt32((usersNextBirthday.Date - DateTime.Now.Date).TotalDays);
             }
 
-            return null;
+            return -1;
         }
     }
 }
