@@ -11,9 +11,7 @@
         </ul>
     </div>
     <div ng-show="friendInfoCards">
-    <span ng-show="friendInfoCards" style="font-size:12px; font-weight:bold;">
-        Start becoming a better friend</span>
-        <span class="pull-right">Friendship Points:<span class="badge pull-right">{{ getActionCount() }}</span>
+        <span class="pull-left">Friendship Points:<span class="badge">{{ getActionCount() }}</span>
     </span></div>
     <div ng-show="friendInfoCards" class="well">
         <span class="label label-primary"># {{friendInfoCards.FriendRank}}</span>
