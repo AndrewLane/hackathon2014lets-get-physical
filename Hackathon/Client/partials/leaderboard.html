@@ -30,9 +30,13 @@
             </a>
             <a ng-show="alreadyliked()" class="btn btn-mini btn-link disabled">Liked</a> 
            
-            <p ng-show="userExtraInfo.DaysUntilBirthday < 30">
+            <p ng-show="userExtraInfo.DaysUntilBirthday < 7">
              <i class="fa fa-calendar"></i> 
                 Has a birthday coming up in {{userExtraInfo.DaysUntilBirthday}} days.  </p>
+			<p ng-show="userExtraInfo.DaysUntilBirthday == 0">
+			<i class="fa fa-calendar"></i> 
+			Today is {{friendInfoCards.FullName}}'s Birthday. 
+			<a class="btn btn-link btn-mini" ng-click="sendMessage()"><i class="fa fa-comment"></i></i> Say Happy Birthday!</a> </p>
         </div>
 
         <div ng-show="userExtraInfo && !userExtraInfo.LastStatusUpdate">
