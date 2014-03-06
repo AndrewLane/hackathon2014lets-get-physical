@@ -24,7 +24,7 @@
         </div>
 
         <div ng-show="userExtraInfo.LastStatusUpdate">
-            {{userExtraInfo.LastStatusUpdate}} <span class="muted" am-time-ago>{{userExtraInfo.LastStatusUpdateDateTime}}</span>
+            {{userExtraInfo.LastStatusUpdate}} <span class="muted" am-time-ago="userExtraInfo.LastStatusUpdateDateTime"></span>
             <a ng-show="!alreadyliked()" ng-click="like()" class="btn btn-link btn-mini">
                 <i class="fa fa-thumbs-up"></i>Like
             </a>
