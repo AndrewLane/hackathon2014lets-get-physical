@@ -14,6 +14,8 @@
         <span>Friendship Points:<span class="badge">{{ getActionCount() }}</span>
         </span>
     </div>
+
+
     <div ng-show="friendInfoCards" class="well">
         <span class="label label-primary"># {{friendInfoCards.FriendRank}}</span>
         <h4 style="display:inline-flex;">
@@ -22,6 +24,8 @@
         <div ng-hide="userExtraInfo">
             <i class="fa fa-spinner fa-spin"></i>
         </div>
+
+
 
         <div ng-show="userExtraInfo.LastStatusUpdate">
             {{userExtraInfo.LastStatusUpdate}} <span class="muted" am-time-ago="userExtraInfo.LastStatusUpdateDateTime"></span>
@@ -39,8 +43,10 @@
 			<a class="btn btn-link btn-mini" ng-click="sendMessage()"><i class="fa fa-comment"></i></i> Say Happy Birthday!</a> </p>
         </div>
 
+
+
         <div ng-show="userExtraInfo && !userExtraInfo.LastStatusUpdate">
-            <span>MIA on facebook! <a class="btn btn-link btn-mini" ng-click="sendMessage()"><i class="fa fa-comment"></i></i> Say hello!</a></span>
+            <span>MIA on facebook! <a class="btn btn-link btn-mini" ng-click="sendMessage()"><i class="fa fa-comment"></i> Say hello!</a> or <a class="btn btn-link btn-mini" ng-click"postFeed()"><i class="fa fa-comment"></i> Post a Comment</a></span>
         </div>
         <div class="center">
             <img src="{{friendInfoCards.ProfilePictureImagePath}}" style="padding-bottom:10px;">
@@ -68,6 +74,8 @@
                     </tr>
                 </tbody>
             </table>
+
+
 
             <a class="btn btn-default" ng-click="suggestActivity()"><img src="/Images/lgp_small.png" style="height:20px; width:20px;"></img>Get Physical</a>
             <a class="btn btn-success" ng-click="sendMessage()">Send Message</a> <br>

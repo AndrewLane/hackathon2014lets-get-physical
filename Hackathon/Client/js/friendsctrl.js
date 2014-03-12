@@ -51,6 +51,17 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
       $scope.recordAction();
     };
 
+    $scope.postFeed = function() {
+      FB.ui({
+        method:'feed'
+        name: 'Facebook Dialogs'
+        link: 'https://developers.facebook.com/docs/dialogs/'
+        description: 'This is a description'
+        caption: 'This is a caption'
+
+      });
+    };
+
     $scope.suggestActivity = function () {
       $scope.recordAction();
       $state.transitionTo("suggest", { index: $scope.friendInfoCards.FriendId });
