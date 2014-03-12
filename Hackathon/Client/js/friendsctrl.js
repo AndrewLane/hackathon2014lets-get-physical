@@ -73,15 +73,7 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
       $scope.alreadyliked_bool = true;
       $scope.recordAction();
     }
-    $scope.postFeed = function() {
-      FB.ui({
-        method:'feed',
-        link: 'https://developers.facebook.com/docs/dialogs/',
-        description: 'This is a description'
-        caption: 'this is a caption'
-        to: friendID
-      })
-    }
+
   });
 });
 
