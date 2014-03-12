@@ -50,7 +50,6 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
       });
       $scope.recordAction();
 
-    }
     };
 
     $scope.suggestActivity = function () {
