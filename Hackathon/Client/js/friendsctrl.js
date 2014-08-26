@@ -54,8 +54,10 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
     $scope.sharePost = function() {
       FB.ui({
         method:'share',
-        display:'popup'
-        href:'http://hackathonletsgetphysical.apphb.com/Client/partials/share_post_static.html', 
+        display:'popup',
+        og-url:'http://hackathonletsgetphysical.apphb.com/',
+        og-image: 'http://hackathonletsgetphysical.apphb.com/Images/lgp_small.png',
+
       }
         );
       $scope.recordAction();
