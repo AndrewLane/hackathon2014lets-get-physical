@@ -56,7 +56,7 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
       FB.ui({
         method:'share',
         href:'http://hackathonletsgetphysical.apphb.com/Client/partials/share_post_static.html', 
-      }, function(resonse){}); 
+      }
         );
       $scope.recordAction();
     };
