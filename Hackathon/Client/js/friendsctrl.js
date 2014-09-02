@@ -53,6 +53,7 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
     };
 
     $scope.sharePost = function() {
+<<<<<<< HEAD
       FB.ui({
         display:'popup',
         method:'share',
@@ -61,6 +62,21 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
         );
       $scope.recordAction();
     };
+=======
+      FB.ui(
+             {
+          method: 'share',
+           href: 'https://developers.facebook.com/docs/',
+          },
+        function(response) {
+        if (response && !response.error_code) {
+        alert('Posting completed.');
+        } else {
+         alert('Error while posting.');
+        }
+      }
+    );
+>>>>>>> FETCH_HEAD
 
 
     $scope.suggestActivity = function () {
