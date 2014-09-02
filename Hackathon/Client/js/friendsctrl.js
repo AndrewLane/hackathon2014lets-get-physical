@@ -45,27 +45,12 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
     $scope.sendMessage = function () {
       FB.ui({
         method: 'send',
-        link: 'http://hackathonletsgetphysical.apphb.com/Client/partials/send_message_static.html',
+        link: 'http://hackathonletsgetphysical.apphb.com/',
         to: friendID()
       });
       $scope.recordAction();
 
     };
-
-    $scope.sharePost = function() {
-      FB.ui(
-             {
-          method: 'share',
-           href: 'https://developers.facebook.com/docs/',
-          },
-        function(response) {
-        if (response && !response.error_code) {
-        alert('Posting completed.');
-        } else {
-         alert('Error while posting.');
-        }
-      }
-    );
 
     $scope.suggestActivity = function () {
       $scope.recordAction();
