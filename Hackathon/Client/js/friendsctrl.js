@@ -53,13 +53,19 @@ angular.module('hackathon').controller('GetInfoCards', function ($scope, $http, 
     };
 
     $scope.sharePost = function() {
-      FB.ui({
-        method:'share',
-        href:'http://hackathonletsgetphysical.apphb.com/Client/partials/share_post_static.html', 
+      FB.ui(
+             {
+          method: 'share',
+           href: 'https://developers.facebook.com/docs/',
+          },
+        function(response) {
+        if (response && !response.error_code) {
+        alert('Posting completed.');
+        } else {
+         alert('Error while posting.');
+        }
       }
-        );
-      $scope.recordAction();
-    };
+    );
 
 
     $scope.suggestActivity = function () {
