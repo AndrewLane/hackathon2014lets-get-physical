@@ -106,41 +106,10 @@ namespace Hackathon.Controllers
             return ExecuteFQL<FriendPhoto>("SELECT owner FROM photo WHERE owner in (select uid2 from friend where uid1 = me())  AND object_id IN (SELECT object_id FROM photo_tag WHERE subject=me() AND created > " + GetUnixTime(DateTime.Today.AddDays(c_BackNumberOfDays)).ToString() + " )");
         }
 
-        protected List<CheckinResult> GetFriendsWhoTaggedMeInCheckins()
-        {
-            string fql = string.Format("SELECT author_uid FROM checkin WHERE author_uid in (select uid2 from friend where uid1 = me()) AND timestamp > {0}  AND me() IN tagged_uids", GetUnixTime(DateTime.Today.AddDays(c_BackNumberOfDays)).ToString());
-
-            return ExecuteFQL<CheckinResult>(fql);
-        }
-
         protected List<CommentResult> GetFriendsWhoHaveCommented()
         {
             string fql = string.Format("select fromid, time from comment where post_id in (select post_id from stream where source_id = me()) AND time > {0}", GetUnixTime(DateTime.Today.AddDays(c_BackNumberOfDays)).ToString());
             return ExecuteFQL<CommentResult>(fql);
-        }
-
-        protected List<CheckIn> GetCheckins()
-        {
-            var webClient = new WebClient();
-
-            var friends = GetFriends();
-
-            var anonymousTypeToReturn = new { data = new List<CheckIn>() };
-
-            var totalCheckIns = new List<CheckIn>();
-
-            foreach (Friend friend in friends)
-            {
-                string url = string.Format("https://graph.facebook.com/{0}/checkins?since={1}&access_token={2}&fields=created_time,id,from,place", friend.uid, GetUnixTime(DateTime.Today.AddDays(c_BackNumberOfDays)).ToString(), _authToken);
-
-                var friendCheckIns = ExecuteApiCall<CheckIn>(url);
-
-                totalCheckIns.AddRange(friendCheckIns);
-
-            }
-
-            return totalCheckIns;
-
         }
 
         #endregion
@@ -185,15 +154,6 @@ namespace Hackathon.Controllers
 
             }
 
-            var checkIns = GetFriendsWhoTaggedMeInCheckins();
-            foreach (var ci in checkIns)
-            {
-                if (_tempRankData.ContainsKey(ci.author_uid))
-                    _tempRankData[ci.author_uid].totalPhysicalRank  += 28;
-
-            }
-
-
             var commenters = GetFriendsWhoHaveCommented();
             foreach(var commenter in commenters)
             {
@@ -223,7 +183,18 @@ namespace Hackathon.Controllers
 
         private List<PrivateMessageResult> GetFriendsWhoHavePrivateMessagedMe()
         {
-            return ExecuteFQL<PrivateMessageResult>("SELECT author_id, created_time FROM message WHERE thread_id in (  SELECT thread_id FROM thread where folder_id = 0) AND author_id <> me() AND created_time > " + GetUnixTime(DateTime.Today.AddDays(c_BackNumberOfDays)).ToString());
+            try
+            {
+                return
+                    ExecuteFQL<PrivateMessageResult>(
+                        "SELECT author_id, created_time FROM message WHERE thread_id in (  SELECT thread_id FROM thread where folder_id = 0) AND author_id <> me() AND created_time > " +
+                        GetUnixTime(DateTime.Today.AddDays(c_BackNumberOfDays)).ToString());
+            }
+            catch
+            {
+                //uh oh
+                return Enumerable.Empty<PrivateMessageResult>().ToList();
+            }
         }
        
         public FriendExtendedInfo GetFriendExtendedInfo(string uid)
