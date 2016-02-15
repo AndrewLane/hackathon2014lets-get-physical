@@ -1,3 +1,3 @@
 **Let's Get Physical!**
 
-More information to come...
+http://hackathonletsgetphysical.apphb.com/
